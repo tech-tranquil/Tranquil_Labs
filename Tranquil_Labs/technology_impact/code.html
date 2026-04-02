@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Technology &amp; Innovation | Tranquil Labs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0b3bcb",
+                        "accent-teal": "#2dd4bf",
+                        "accent-lavender": "#a78bfa",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0c14",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-teal {
+            box-shadow: 0 0 40px -10px rgba(45, 212, 191, 0.2);
+        }
+        .glow-lavender {
+            box-shadow: 0 0 40px -10px rgba(167, 139, 250, 0.2);
+        }
+        .bg-mesh {
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(11, 59, 203, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(167, 139, 250, 0.1) 0px, transparent 50%);
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen bg-mesh">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-800 px-6 md:px-20 py-4 glass sticky top-0 z-50">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg">
+<span class="material-symbols-outlined text-white">storm</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Tranquil Labs</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-center gap-12">
+<a class="text-slate-300 hover:text-white text-sm font-medium transition-colors" href="#">Technology</a>
+<a class="text-slate-300 hover:text-white text-sm font-medium transition-colors" href="#">Behavioral Engine</a>
+<a class="text-slate-300 hover:text-white text-sm font-medium transition-colors" href="#">Impact</a>
+<a class="text-slate-300 hover:text-white text-sm font-medium transition-colors" href="#">Investors</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold transition-all hover:opacity-90">
+                        Access Portal
+                    </button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-slate-700" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAq-F8iXXAtafGMG0ckc-Lwjlb7dw69csL4w-NCXN9-MToz0S0ldUGM2qJkUv1wlNMiw2q3JO3LaDeebsCYkZkTPqXEBWgfS80fbmCzcqzYer_akQuVEf46lU0ktViQeOS6NCOQsXq2619YjsUrg4jhoTzPFJaTMjrbX3eYATIAq2fH_ovAA6PeUJnN86dwykeAcaSqbKYTHBqKiEspYeKl4txj3_RtQW6k9_mly9D5HnuB-JXJ4hsrKRDsEM-UaIcRb1sdJHVUIl3o");'></div>
+</div>
+</header>
+<main class="flex flex-col flex-1 px-6 md:px-20 py-12 max-w-7xl mx-auto w-full">
+<section class="mb-16">
+<div class="flex flex-col gap-6 max-w-3xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-teal/10 border border-accent-teal/20 w-fit">
+<span class="material-symbols-outlined text-accent-teal text-sm">auto_awesome</span>
+<span class="text-accent-teal text-xs font-bold uppercase tracking-wider">Innovation Core</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-black leading-tight tracking-tight text-white">
+                            Technology Behind <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-teal to-accent-lavender">Tranquil</span>
+</h1>
+<p class="text-slate-400 text-lg md:text-xl max-w-2xl leading-relaxed">
+                            A fusion of advanced neural architectures and human-centered design principles created to foster mental well-being and digital serenity.
+                        </p>
+</div>
+</section>
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
+<div class="glass p-8 rounded-xl glow-teal relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 size-24 bg-accent-teal/10 rounded-full blur-3xl group-hover:bg-accent-teal/20 transition-all"></div>
+<span class="material-symbols-outlined text-accent-teal text-4xl mb-6">psychology</span>
+<h3 class="text-xl font-bold text-white mb-3">Adaptive AI Models</h3>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Proprietary Large Behavioral Models (LBMs) that learn individual cognitive patterns without compromising privacy through edge-computing optimization.
+                        </p>
+<div class="space-y-3">
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="size-1.5 rounded-full bg-accent-teal"></span>
+                                Transformer-based emotional mapping
+                            </div>
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="size-1.5 rounded-full bg-accent-teal"></span>
+                                Local-first inference engines
+                            </div>
+</div>
+</div>
+<div class="glass p-8 rounded-xl glow-lavender relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 size-24 bg-accent-lavender/10 rounded-full blur-3xl group-hover:bg-accent-lavender/20 transition-all"></div>
+<span class="material-symbols-outlined text-accent-lavender text-4xl mb-6">monitoring</span>
+<h3 class="text-xl font-bold text-white mb-3">Behavioral Analytics</h3>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Real-time biometric data fusion identifying early signs of cognitive load and stress before they manifest as fatigue.
+                        </p>
+<div class="space-y-3">
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="size-1.5 rounded-full bg-accent-lavender"></span>
+                                HRV &amp; Cortisol trend prediction
+                            </div>
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="size-1.5 rounded-full bg-accent-lavender"></span>
+                                Context-aware intervention triggers
+                            </div>
+</div>
+</div>
+<div class="glass p-8 rounded-xl relative overflow-hidden group border-primary/20">
+<div class="absolute -right-4 -top-4 size-24 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all"></div>
+<span class="material-symbols-outlined text-primary text-4xl mb-6">model_training</span>
+<h3 class="text-xl font-bold text-white mb-3">Human-Centered Design</h3>
+<p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Interface logic inspired by natural ecosystems, utilizing non-intrusive haptics and ambient notification frameworks.
+                        </p>
+<div class="space-y-3">
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                Minimalist attention-recovery UI
+                            </div>
+<div class="flex items-center gap-2 text-xs text-slate-300">
+<span class="size-1.5 rounded-full bg-primary"></span>
+                                Accessibility-first interaction models
+                            </div>
+</div>
+</div>
+</section>
+<section class="mb-24">
+<h2 class="text-3xl font-bold text-white mb-10 text-center">System Architecture</h2>
+<div class="glass rounded-2xl p-6 md:p-12 border-slate-800">
+<div class="flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex flex-col items-center gap-4 w-full md:w-1/4">
+<div class="w-full aspect-video rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center p-4">
+<div class="grid grid-cols-3 gap-2 w-full h-full">
+<div class="bg-accent-teal/20 rounded border border-accent-teal/40"></div>
+<div class="bg-accent-teal/40 rounded border border-accent-teal/60"></div>
+<div class="bg-accent-teal/20 rounded border border-accent-teal/40"></div>
+<div class="bg-accent-teal/10 rounded border border-accent-teal/20"></div>
+<div class="bg-accent-teal/30 rounded border border-accent-teal/50"></div>
+<div class="bg-accent-teal/10 rounded border border-accent-teal/20"></div>
+</div>
+</div>
+<p class="text-xs font-bold text-accent-teal uppercase">Data Ingestion Layer</p>
+</div>
+<span class="material-symbols-outlined text-slate-600 rotate-90 md:rotate-0">arrow_forward</span>
+<div class="flex flex-col items-center gap-4 w-full md:w-1/3">
+<div class="w-full aspect-square rounded-full border-2 border-dashed border-accent-lavender/30 flex items-center justify-center relative p-8">
+<div class="absolute inset-0 bg-accent-lavender/5 rounded-full"></div>
+<div class="size-32 rounded-2xl glass border-accent-lavender/40 flex items-center justify-center z-10 shadow-2xl shadow-accent-lavender/20">
+<span class="material-symbols-outlined text-accent-lavender text-5xl">hub</span>
+</div>
+<div class="absolute top-0 right-0 size-12 bg-primary rounded-full blur-xl opacity-50"></div>
+</div>
+<p class="text-xs font-bold text-accent-lavender uppercase text-center">Core Neural Processing Engine</p>
+</div>
+<span class="material-symbols-outlined text-slate-600 rotate-90 md:rotate-0">arrow_forward</span>
+<div class="flex flex-col items-center gap-4 w-full md:w-1/4">
+<div class="w-full aspect-video rounded-xl bg-slate-900 border border-slate-700 flex flex-col justify-end p-4 gap-2">
+<div class="h-2 w-full bg-primary/40 rounded"></div>
+<div class="h-2 w-2/3 bg-primary/60 rounded"></div>
+<div class="h-2 w-4/5 bg-primary/20 rounded"></div>
+</div>
+<p class="text-xs font-bold text-primary uppercase">User Synthesis Layer</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-16">
+<div class="flex justify-between items-end mb-10">
+<div class="max-w-xl">
+<h2 class="text-4xl font-black text-white mb-4 italic tracking-tight">Innovating with Serenity</h2>
+<p class="text-slate-400">Traction and evidence-based impact metrics for our global ecosystem partners.</p>
+</div>
+<button class="hidden md:block text-primary font-bold hover:underline flex items-center gap-2">
+                            Download Investor Deck <span class="material-symbols-outlined text-sm">download</span>
+</button>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass p-6 rounded-xl border-l-4 border-l-accent-teal">
+<p class="text-slate-500 text-xs font-bold uppercase mb-2">Daily Active Users</p>
+<h4 class="text-3xl font-black text-white">1.2M+</h4>
+<div class="flex items-center gap-1 text-emerald-400 text-xs mt-2">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                                24% MoM
+                            </div>
+</div>
+<div class="glass p-6 rounded-xl border-l-4 border-l-accent-lavender">
+<p class="text-slate-500 text-xs font-bold uppercase mb-2">Stress Reduction</p>
+<h4 class="text-3xl font-black text-white">38%</h4>
+<div class="flex items-center gap-1 text-emerald-400 text-xs mt-2">
+<span class="material-symbols-outlined text-sm">verified</span>
+                                Clinically Validated
+                            </div>
+</div>
+<div class="glass p-6 rounded-xl border-l-4 border-l-primary">
+<p class="text-slate-500 text-xs font-bold uppercase mb-2">API Partners</p>
+<h4 class="text-3xl font-black text-white">450+</h4>
+<div class="flex items-center gap-1 text-slate-400 text-xs mt-2">
+                                Global Enterprise Tech
+                            </div>
+</div>
+<div class="glass p-6 rounded-xl border-l-4 border-l-slate-600">
+<p class="text-slate-500 text-xs font-bold uppercase mb-2">Patent Portfolio</p>
+<h4 class="text-3xl font-black text-white">12</h4>
+<div class="flex items-center gap-1 text-slate-400 text-xs mt-2">
+                                4 Pending Approval
+                            </div>
+</div>
+</div>
+</section>
+<section class="mt-20 glass p-10 rounded-3xl overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent"></div>
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="max-w-lg">
+<h2 class="text-3xl font-bold text-white mb-4">Invest in the future of Cognitive Health.</h2>
+<p class="text-slate-300">Join a network of visionary investors scaling technology that prioritizes human balance over algorithmic noise.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+<button class="bg-white text-background-dark font-bold px-8 py-3 rounded-lg hover:bg-slate-200 transition-colors">Contact Relations</button>
+<button class="bg-slate-800 text-white font-bold px-8 py-3 rounded-lg border border-slate-700 hover:bg-slate-700 transition-colors">Tech Documentation</button>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-slate-800 px-6 md:px-20 py-12 glass mt-20">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+<div class="col-span-2">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">storm</span>
+<span class="text-white font-bold text-xl">Tranquil Labs</span>
+</div>
+<p class="text-slate-400 max-w-xs text-sm leading-relaxed">
+                            Leading the paradigm shift in digital mental wellness through innovative AI architecture and ethical data practices.
+                        </p>
+</div>
+<div>
+<h5 class="text-white font-bold mb-6 text-sm">Navigation</h5>
+<ul class="space-y-4 text-sm text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">Home</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Technology</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Impact</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-white font-bold mb-6 text-sm">Connect</h5>
+<ul class="space-y-4 text-sm text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">Twitter</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">LinkedIn</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Newsroom</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+<p>© 2024 Tranquil Labs Inc. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Security Standards</a>
+<a class="hover:text-white transition-colors" href="#">Cookie Policy</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: #0A0A0B;
+  --color-surface: #0f1117;
+  --color-teal: #2dd4bf;
+  --color-lavender: #a78bfa;
+  --color-primary: #0b3bcb;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+body {
+  background-color: #0A0A0B;
+  color: #f8fafc;
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Glass utilities ─── */
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-teal {
+    background: rgba(45, 212, 191, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(45, 212, 191, 0.15);
+  }
+
+  .glass-lavender {
+    background: rgba(167, 139, 250, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(167, 139, 250, 0.15);
+  }
+
+  .glass-dark {
+    background: rgba(15, 17, 23, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Glow text */
+  .text-glow-teal {
+    text-shadow: 0 0 20px rgba(45, 212, 191, 0.5);
+  }
+
+  .text-glow-lavender {
+    text-shadow: 0 0 20px rgba(167, 139, 250, 0.5);
+  }
+
+  /* Gradient text */
+  .gradient-text-teal {
+    background: linear-gradient(135deg, #2dd4bf, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-primary {
+    background: linear-gradient(135deg, #0b3bcb, #2dd4bf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Section container */
+  .section-container {
+    @apply max-w-7xl mx-auto px-6 lg:px-10;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply py-24 lg:py-32;
+  }
+
+  /* Pill badge */
+  .pill-badge {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest;
+  }
+
+  /* Noise overlay for depth */
+  .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0B;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(45, 212, 191, 0.3);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(45, 212, 191, 0.6);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: rgba(45, 212, 191, 0.2);
+  color: #2dd4bf;
+}
+
+/* ─── Focus rings ─── */
+*:focus-visible {
+  outline: 2px solid rgba(45, 212, 191, 0.5);
+  outline-offset: 2px;
+}
+
+/* ─── Ticker animation ─── */
+.ticker-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-flex;
+  animation: ticker 30s linear infinite;
+  will-change: transform;
+}
+.ticker-inner:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Smooth section transitions ─── */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* ─── Phone frame ─── */
+.phone-frame {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 36px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 40px 80px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.phone-frame::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  z-index: 10;
+}
+
+/* ─── SVG path animation ─── */
+.path-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+/* ─── Breathing circle ─── */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+/* ─── Performance: GPU layers for animated elements ─── */
+.gpu {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
