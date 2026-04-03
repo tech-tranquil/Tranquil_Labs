@@ -1,15 +1,23 @@
 "use client";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Send, CheckCircle, Cpu, Globe, Layers, Code } from "lucide-react";
+import { Send, CheckCircle, Cpu, Globe, Layers, Code, Mail, ArrowRight, Sparkles } from "lucide-react";
 import { slideLeft, slideRight, viewportOnce } from "@/lib/animations";
 
 const services = [
-  { icon: Cpu, label: "AI Product Development" },
-  { icon: Globe, label: "AI Integrations" },
-  { icon: Layers, label: "LLM Fine-tuning" },
-  { icon: Code, label: "Startup Product Build" },
+  { icon: Cpu,    label: "AI Product Development", desc: "End-to-end AI build" },
+  { icon: Globe,  label: "AI Integrations",          desc: "GPT, Claude, Gemini" },
+  { icon: Layers, label: "LLM Fine-tuning",          desc: "Custom model training" },
+  { icon: Code,   label: "Startup Product Build",    desc: "0-to-1 execution" },
+];
+
+const reasons = [
+  "Deep AI expertise — LLM, NLP, behavioral ML",
+  "Startup-speed execution with enterprise quality",
+  "End-to-end: design, build, deploy, iterate",
+  "Ethical AI principles baked into every product",
+  "NASSCOM-recognized, globally connected team",
 ];
 
 interface FormData {
@@ -22,6 +30,7 @@ interface FormData {
 
 export function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const {
     register,
@@ -30,30 +39,62 @@ export function ContactSection() {
   } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
-    await new Promise((r) => setTimeout(r, 1200));
-    console.log(data);
-    setSubmitted(true);
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        access_key: "749db36a-922e-410b-82cd-6955c8927628",
+        subject: `New project enquiry from ${data.name} — ${data.company}`,
+        from_name: data.name,
+        email: data.email,
+        company: data.company,
+        project_type: data.projectType,
+        message: data.message,
+      }),
+    });
+    if (res.ok) setSubmitted(true);
   };
+
+  const inputClass = (name: string, hasError?: boolean) => `
+    w-full bg-white/[0.04] border rounded-xl px-4 py-3 text-sm placeholder-slate-600
+    focus:outline-none transition-all duration-300
+    ${hasError ? "border-red-400/40 focus:border-red-400/60" : ""}
+    ${focusedField === name && !hasError
+      ? "border-teal/40 bg-white/[0.06] shadow-[0_0_20px_-8px_rgba(45,212,191,0.3)]"
+      : !hasError ? "border-white/10 hover:border-white/20" : ""
+    }
+  `;
 
   return (
     <section id="contact" className="section-padding relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-lavender/5 via-transparent to-teal/5 pointer-events-none" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-lavender/[0.04] via-transparent to-teal/[0.04] pointer-events-none" />
+      <div
+        className="absolute inset-0 bg-dot-grid pointer-events-none opacity-30"
+        style={{ maskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 100%)" }}
+      />
 
       <div className="section-container">
+        {/* Header */}
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
+          transition={{ duration: 0.7 }}
         >
-          <div className="pill-badge bg-lavender/10 border border-lavender/20 text-lavender mb-6">
+          <motion.div
+            className="pill-badge bg-lavender/10 border border-lavender/20 text-lavender mb-6 inline-flex"
+            whileHover={{ scale: 1.05 }}
+          >
+            <Sparkles className="w-3 h-3" />
             Build With Us
-          </div>
+          </motion.div>
           <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
             Let's build{" "}
-            <span className="gradient-text-teal">something great</span>
+            <span className="gradient-text-animated">something great</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+          <p className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed">
             Partner with Tranquil Labs to build intelligent products that users love.
           </p>
         </motion.div>
@@ -65,50 +106,65 @@ export function ContactSection() {
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            className="space-y-8"
+            className="space-y-6"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-4">What we offer</h3>
-              <div className="grid grid-cols-2 gap-4">
-                {services.map(({ icon: Icon, label }) => (
-                  <div
+              <h3 className="text-xl font-bold mb-5 text-slate-200">What we offer</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {services.map(({ icon: Icon, label, desc }) => (
+                  <motion.div
                     key={label}
-                    className="glass rounded-xl p-4 border border-lavender/10 hover:border-lavender/30 transition-colors"
+                    className="glass rounded-2xl p-4 border border-lavender/10 hover:border-lavender/30 hover:bg-lavender/[0.04] transition-all duration-300 group card-shine"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <Icon className="w-6 h-6 text-lavender mb-2" />
-                    <p className="font-semibold text-sm">{label}</p>
-                  </div>
+                    <div className="w-9 h-9 bg-lavender/15 border border-lavender/20 rounded-xl flex items-center justify-center mb-3 group-hover:bg-lavender/25 transition-colors">
+                      <Icon className="w-4 h-4 text-lavender" />
+                    </div>
+                    <p className="font-semibold text-sm text-white leading-tight">{label}</p>
+                    <p className="text-[11px] text-slate-600 mt-0.5">{desc}</p>
+                  </motion.div>
                 ))}
               </div>
             </div>
 
-            <div className="glass rounded-2xl p-6 border border-teal/10">
-              <h4 className="font-bold mb-3 text-teal">Why Tranquil Labs?</h4>
-              <ul className="space-y-3">
-                {[
-                  "Deep AI expertise — LLM, NLP, behavioral ML",
-                  "Startup-speed execution with enterprise quality",
-                  "End-to-end: design, build, deploy, iterate",
-                  "Ethical AI principles baked into every product",
-                  "NASSCOM-recognized, globally connected team",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-slate-300">
+            {/* Why Tranquil Labs */}
+            <motion.div
+              className="glass rounded-2xl p-6 border border-teal/10 hover:border-teal/20 transition-colors"
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-7 h-7 bg-teal/15 rounded-lg flex items-center justify-center">
+                  <Sparkles className="w-3.5 h-3.5 text-teal" />
+                </div>
+                <h4 className="font-bold text-sm text-teal">Why Tranquil Labs?</h4>
+              </div>
+              <ul className="space-y-2.5">
+                {reasons.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm text-slate-400 leading-relaxed">
                     <span className="w-1.5 h-1.5 bg-teal rounded-full mt-1.5 flex-shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="glass rounded-2xl p-6 border border-white/5">
-              <p className="text-slate-500 text-sm">Or reach us directly</p>
-              <a
-                href="mailto:hello@tranquillabs.ai"
-                className="text-teal font-bold hover:underline block mt-1"
-              >
-                hello@tranquillabs.ai
-              </a>
-            </div>
+            {/* Direct contact */}
+            <motion.a
+              href="mailto:support@tranquilai.in"
+              className="flex items-center gap-4 glass rounded-2xl p-5 border border-white/5 hover:border-teal/20 hover:bg-teal/[0.03] transition-all group"
+              whileHover={{ scale: 1.01, y: -1 }}
+            >
+              <div className="w-10 h-10 bg-teal/10 border border-teal/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-teal/20 transition-colors">
+                <Mail className="w-4 h-4 text-teal" />
+              </div>
+              <div>
+                <p className="text-xs text-slate-500 font-medium">Or reach us directly</p>
+                <p className="text-teal font-bold text-sm mt-0.5">support@tranquilai.in</p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-teal ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+            </motion.a>
           </motion.div>
 
           {/* Right: Form */}
@@ -118,122 +174,166 @@ export function ContactSection() {
             whileInView="visible"
             viewport={viewportOnce}
           >
-            {submitted ? (
-              <motion.div
-                className="glass-teal rounded-2xl p-12 text-center"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-              >
-                <CheckCircle className="w-16 h-16 text-teal mx-auto mb-5" />
-                <h3 className="text-2xl font-bold mb-3">Message Received!</h3>
-                <p className="text-slate-400">
-                  We'll get back to you within 24 hours. Exciting things ahead.
-                </p>
-              </motion.div>
-            ) : (
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="glass rounded-2xl p-8 border border-white/5 space-y-5"
-              >
-                <div className="grid sm:grid-cols-2 gap-5">
+            <AnimatePresence mode="wait">
+              {submitted ? (
+                <motion.div
+                  key="success"
+                  className="glass rounded-3xl p-12 text-center border border-teal/20"
+                  style={{ boxShadow: "0 0 60px -20px rgba(45,212,191,0.2), 0 4px 24px rgba(0,0,0,0.4)" }}
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                  >
+                    <CheckCircle className="w-16 h-16 text-teal mx-auto mb-6" />
+                  </motion.div>
+                  <h3 className="text-2xl font-black mb-3">Message Received!</h3>
+                  <p className="text-slate-400 leading-relaxed">
+                    We'll get back to you within 24 hours.<br />
+                    Exciting things ahead. 🚀
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="form"
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="glass rounded-3xl p-8 border border-white/[0.07] space-y-5"
+                  style={{ boxShadow: "0 4px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)" }}
+                  initial={{ opacity: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                >
+                  {/* Form header */}
+                  <div className="mb-6">
+                    <h3 className="text-lg font-bold text-white">Start a conversation</h3>
+                    <p className="text-xs text-slate-500 mt-1">We respond within 24 hours</p>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs text-slate-400 font-semibold block mb-2 uppercase tracking-wider">
+                        Your Name *
+                      </label>
+                      <input
+                        {...register("name", { required: "Required" })}
+                        placeholder="Jane Smith"
+                        onFocus={() => setFocusedField("name")}
+                        onBlur={() => setFocusedField(null)}
+                        className={inputClass("name", !!errors.name)}
+                      />
+                      {errors.name && (
+                        <p className="text-red-400 text-xs mt-1.5">{errors.name.message}</p>
+                      )}
+                    </div>
+                    <div>
+                      <label className="text-xs text-slate-400 font-semibold block mb-2 uppercase tracking-wider">
+                        Company
+                      </label>
+                      <input
+                        {...register("company")}
+                        placeholder="Acme Inc."
+                        onFocus={() => setFocusedField("company")}
+                        onBlur={() => setFocusedField(null)}
+                        className={inputClass("company")}
+                      />
+                    </div>
+                  </div>
+
                   <div>
-                    <label className="text-xs text-slate-400 font-medium block mb-2">
-                      Your Name *
+                    <label className="text-xs text-slate-400 font-semibold block mb-2 uppercase tracking-wider">
+                      Email *
                     </label>
                     <input
-                      {...register("name", { required: "Required" })}
-                      placeholder="Jane Smith"
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder-slate-600 focus:outline-none focus:border-teal/40 transition-colors"
+                      {...register("email", {
+                        required: "Required",
+                        pattern: { value: /^\S+@\S+\.\S+$/, message: "Invalid email" },
+                      })}
+                      type="email"
+                      placeholder="jane@company.com"
+                      onFocus={() => setFocusedField("email")}
+                      onBlur={() => setFocusedField(null)}
+                      className={inputClass("email", !!errors.email)}
                     />
-                    {errors.name && (
-                      <p className="text-red-400 text-xs mt-1">{errors.name.message}</p>
+                    {errors.email && (
+                      <p className="text-red-400 text-xs mt-1.5">{errors.email.message}</p>
                     )}
                   </div>
+
                   <div>
-                    <label className="text-xs text-slate-400 font-medium block mb-2">
-                      Company
+                    <label className="text-xs text-slate-400 font-semibold block mb-2 uppercase tracking-wider">
+                      Project Type
                     </label>
-                    <input
-                      {...register("company")}
-                      placeholder="Acme Inc."
-                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder-slate-600 focus:outline-none focus:border-teal/40 transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-2">
-                    Email *
-                  </label>
-                  <input
-                    {...register("email", {
-                      required: "Required",
-                      pattern: { value: /^\S+@\S+\.\S+$/, message: "Invalid email" },
-                    })}
-                    type="email"
-                    placeholder="jane@company.com"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder-slate-600 focus:outline-none focus:border-teal/40 transition-colors"
-                  />
-                  {errors.email && (
-                    <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-2">
-                    Project Type
-                  </label>
-                  <select
-                    {...register("projectType")}
-                    className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-300 focus:outline-none focus:border-teal/40 transition-colors"
-                  >
-                    <option value="">Select a service...</option>
-                    <option>AI Product Development</option>
-                    <option>LLM Fine-tuning & Integration</option>
-                    <option>Startup Product Build</option>
-                    <option>AI Strategy & Consulting</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="text-xs text-slate-400 font-medium block mb-2">
-                    Tell us about your project *
-                  </label>
-                  <textarea
-                    {...register("message", { required: "Required" })}
-                    rows={4}
-                    placeholder="Describe your vision, timeline, and goals..."
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm placeholder-slate-600 focus:outline-none focus:border-teal/40 transition-colors resize-none"
-                  />
-                  {errors.message && (
-                    <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>
-                  )}
-                </div>
-
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-2 bg-teal text-background py-4 rounded-xl font-bold hover:shadow-glow-teal transition-all disabled:opacity-70"
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {isSubmitting ? (
-                    <motion.span
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    <select
+                      {...register("projectType")}
+                      onFocus={() => setFocusedField("projectType")}
+                      onBlur={() => setFocusedField(null)}
+                      className={`${inputClass("projectType")} bg-surface text-slate-300 cursor-pointer`}
                     >
-                      ⏳
-                    </motion.span>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      Send Message
-                    </>
-                  )}
-                </motion.button>
-              </form>
-            )}
+                      <option value="">Select a service...</option>
+                      <option>AI Product Development</option>
+                      <option>LLM Fine-tuning &amp; Integration</option>
+                      <option>Startup Product Build</option>
+                      <option>AI Strategy &amp; Consulting</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-slate-400 font-semibold block mb-2 uppercase tracking-wider">
+                      Tell us about your project *
+                    </label>
+                    <textarea
+                      {...register("message", { required: "Required" })}
+                      rows={4}
+                      placeholder="Describe your vision, timeline, and goals..."
+                      onFocus={() => setFocusedField("message")}
+                      onBlur={() => setFocusedField(null)}
+                      className={`${inputClass("message", !!errors.message)} resize-none`}
+                    />
+                    {errors.message && (
+                      <p className="text-red-400 text-xs mt-1.5">{errors.message.message}</p>
+                    )}
+                  </div>
+
+                  <motion.button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="group relative w-full flex items-center justify-center gap-2.5 bg-teal text-background py-4 rounded-xl font-bold text-sm overflow-hidden disabled:opacity-60"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                        "0 0 40px -8px rgba(45,212,191,0.55)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
+                    }}
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
+                      {isSubmitting ? (
+                        <>
+                          <motion.span
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            className="inline-block w-4 h-4 border-2 border-background/30 border-t-background rounded-full"
+                          />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          Send Message
+                        </>
+                      )}
+                    </span>
+                    <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
+                  </motion.button>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </div>

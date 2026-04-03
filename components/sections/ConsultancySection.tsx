@@ -119,9 +119,9 @@ export function ConsultancySection() {
             viewport={viewportOnce}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-2xl font-bold mb-8 text-slate-200">Our Services</h3>
+            <h3 className="text-xl font-bold mb-6 text-slate-200">Our Services</h3>
             <motion.div
-              className="space-y-4"
+              className="space-y-3"
               initial="hidden"
               whileInView="visible"
               viewport={viewportOnce}
@@ -131,31 +131,44 @@ export function ConsultancySection() {
                 <motion.div
                   key={label}
                   variants={fadeUp}
-                  className="flex items-start gap-4 p-5 glass rounded-2xl border border-lavender/10 hover:border-lavender/30 hover:bg-lavender/5 transition-all duration-300 group"
+                  className="flex items-center gap-4 p-4 glass rounded-2xl border border-lavender/10 hover:border-lavender/30 hover:bg-lavender/[0.04] transition-all duration-300 group card-shine"
+                  whileHover={{ scale: 1.01, x: 4 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <div className="w-10 h-10 bg-lavender/15 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-lavender/25 transition-colors">
+                  <div className="w-10 h-10 bg-lavender/15 border border-lavender/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-lavender/25 transition-colors">
                     <Icon className="w-5 h-5 text-lavender" />
                   </div>
-                  <div>
-                    <p className="font-bold text-white mb-0.5">{label}</p>
-                    <p className="text-sm text-slate-500">{desc}</p>
+                  <div className="flex-1">
+                    <p className="font-bold text-white text-sm">{label}</p>
+                    <p className="text-xs text-slate-500 mt-0.5">{desc}</p>
                   </div>
+                  <ArrowRight className="w-4 h-4 text-lavender opacity-0 group-hover:opacity-100 transition-opacity" />
                 </motion.div>
               ))}
             </motion.div>
 
             <motion.button
               onClick={() => scrollTo("contact")}
-              className="mt-10 flex items-center gap-2 bg-lavender text-background px-8 py-4 rounded-xl font-bold text-lg hover:bg-lavender/90 hover:shadow-glow-lavender transition-all"
+              className="group relative mt-8 flex items-center gap-2.5 bg-lavender text-background px-8 py-4 rounded-xl font-bold text-sm overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewportOnce}
               transition={{ delay: 0.5, duration: 0.6 }}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                  "0 0 40px -8px rgba(167,139,250,0.55)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
+              }}
             >
-              Start Your Project
-              <ArrowRight className="w-5 h-5" />
+              <span className="relative z-10 flex items-center gap-2">
+                Start Your Project
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
             </motion.button>
           </motion.div>
 
@@ -193,13 +206,13 @@ export function ConsultancySection() {
               </svg>
 
               {/* Pipeline stages */}
-              <div className="space-y-8 w-full relative z-10">
+              <div className="space-y-5 w-full relative z-10">
                 {pipeline.map((stage, i) => {
                   const Icon = stage.icon;
                   return (
                     <motion.div
                       key={stage.id}
-                      className="flex items-center gap-5"
+                      className="flex items-center gap-4"
                       initial={{ opacity: 0, x: 30 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={viewportOnce}
@@ -207,20 +220,24 @@ export function ConsultancySection() {
                     >
                       {/* Stage number + icon */}
                       <div className="flex-shrink-0 relative">
-                        <div
-                          className="w-16 h-16 rounded-2xl flex items-center justify-center border"
+                        <motion.div
+                          className="w-14 h-14 rounded-2xl flex items-center justify-center border"
                           style={{
-                            background: `${stage.color}15`,
-                            borderColor: `${stage.color}30`,
+                            background: `${stage.color}12`,
+                            borderColor: `${stage.color}25`,
+                          }}
+                          whileHover={{
+                            background: `${stage.color}20`,
+                            boxShadow: `0 0 20px -5px ${stage.color}40`,
                           }}
                         >
-                          <Icon className="w-7 h-7" style={{ color: stage.color }} />
-                        </div>
+                          <Icon className="w-6 h-6" style={{ color: stage.color }} />
+                        </motion.div>
                         <div
-                          className="absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center text-xs font-black border"
+                          className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black border"
                           style={{
                             background: `${stage.color}20`,
-                            borderColor: `${stage.color}40`,
+                            borderColor: `${stage.color}50`,
                             color: stage.color,
                           }}
                         >
@@ -229,10 +246,14 @@ export function ConsultancySection() {
                       </div>
 
                       {/* Label */}
-                      <div className="glass rounded-2xl px-6 py-4 flex-1 border border-white/5 hover:border-lavender/20 transition-colors">
-                        <p className="font-bold text-white text-lg">{stage.label}</p>
-                        <p className="text-sm text-slate-500 mt-0.5">{stage.sub}</p>
-                      </div>
+                      <motion.div
+                        className="glass rounded-2xl px-5 py-3.5 flex-1 border border-white/5 hover:border-lavender/20 transition-all duration-300 group card-shine"
+                        whileHover={{ scale: 1.01, y: -1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <p className="font-bold text-white text-sm">{stage.label}</p>
+                        <p className="text-xs text-slate-500 mt-0.5">{stage.sub}</p>
+                      </motion.div>
                     </motion.div>
                   );
                 })}

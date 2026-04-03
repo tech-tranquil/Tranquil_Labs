@@ -36,10 +36,10 @@ const dauData = [
 ];
 
 const metrics = [
-  { value: "1M+", label: "AI Interactions", color: "text-teal" },
-  { value: "100K+", label: "Users", color: "text-lavender" },
-  { value: "500+", label: "Projects Delivered", color: "text-blue-400" },
-  { value: "30+", label: "Enterprise Integrations", color: "text-green-400" },
+  { value: "100K+", label: "AI Interactions", color: "text-teal" },
+  { value: "40K+", label: "Users", color: "text-lavender" },
+  { value: "5+", label: "Projects Delivered", color: "text-blue-400" },
+  { value: "10+", label: "Enterprise Integrations", color: "text-green-400" },
   { value: "4.8★", label: "App Store Rating", color: "text-amber-400" },
   { value: "38%", label: "Avg Stress Reduction", color: "text-teal" },
   { value: "87%", label: "30-day Retention", color: "text-lavender" },
@@ -87,7 +87,8 @@ export function TractionSection() {
         <div className="grid lg:grid-cols-2 gap-8 mb-20">
           {/* User Growth Line Chart */}
           <motion.div
-            className="glass rounded-2xl p-6 border border-teal/10"
+            className="glass rounded-2xl p-6 border border-teal/10 hover:border-teal/20 transition-all card-shine"
+            style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(45,212,191,0.04)" }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportOnce}
@@ -115,7 +116,8 @@ export function TractionSection() {
 
           {/* DAU Area Chart */}
           <motion.div
-            className="glass rounded-2xl p-6 border border-lavender/10"
+            className="glass rounded-2xl p-6 border border-lavender/10 hover:border-lavender/20 transition-all card-shine"
+            style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(167,139,250,0.04)" }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportOnce}
@@ -149,7 +151,7 @@ export function TractionSection() {
 
         {/* Metrics grid */}
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-4 gap-5"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-4"
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
@@ -159,13 +161,20 @@ export function TractionSection() {
             <motion.div
               key={m.label}
               variants={fadeUp}
-              className="glass rounded-2xl p-6 text-center border border-white/5 hover:border-teal/10 transition-colors"
+              className="glass rounded-2xl p-6 text-center border border-white/5 hover:border-teal/15 transition-all duration-300 group card-shine relative overflow-hidden"
+              whileHover={{ scale: 1.03, y: -4 }}
+              transition={{ duration: 0.25 }}
+              style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.4)" }}
             >
+              {/* Ambient glow on hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+                style={{ background: `radial-gradient(ellipse at 50% 50%, ${m.color === "text-teal" ? "rgba(45,212,191,0.05)" : m.color === "text-lavender" ? "rgba(167,139,250,0.05)" : m.color === "text-blue-400" ? "rgba(96,165,250,0.05)" : m.color === "text-green-400" ? "rgba(52,211,153,0.05)" : "rgba(251,191,36,0.05)"} 0%, transparent 70%)` }}
+              />
               <AnimatedCounter
                 value={m.value}
-                className={`text-3xl font-black ${m.color}`}
+                className={`text-3xl font-black ${m.color} relative z-10`}
               />
-              <p className="text-slate-500 text-xs mt-2 leading-tight">{m.label}</p>
+              <p className="text-slate-500 text-xs mt-2 leading-tight relative z-10">{m.label}</p>
             </motion.div>
           ))}
         </motion.div>

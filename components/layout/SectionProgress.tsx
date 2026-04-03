@@ -4,37 +4,32 @@ import { motion, AnimatePresence } from "framer-motion";
 import { getLenis } from "@/hooks/useLenis";
 
 const sections = [
-  { id: "hero", label: "Hero" },
-  { id: "problem", label: "Problem" },
-  { id: "vision", label: "Vision" },
-  { id: "ecosystem", label: "Ecosystem" },
-  { id: "use-cases", label: "Use Cases" },
-  { id: "product-demo", label: "Product" },
-  { id: "technology", label: "Technology" },
-  { id: "projects", label: "Projects" },
-  { id: "media", label: "Media" },
-  { id: "trusted", label: "Trusted By" },
-  { id: "traction", label: "Impact" },
-  { id: "team", label: "Team" },
-  { id: "contact", label: "Contact" },
-  { id: "download", label: "Download" },
-  { id: "closing", label: "Closing" },
+  { id: "hero",         label: "Home" },
+  { id: "ecosystem",    label: "Ecosystem" },
+  { id: "about",        label: "About" },
+  { id: "use-cases",    label: "Use Cases" },
+  { id: "tranquil-ai",  label: "Tranquil AI" },
+  { id: "consultancy",  label: "Consultancy" },
+  { id: "projects",     label: "Projects" },
+  { id: "technology",   label: "Technology" },
+  { id: "media",        label: "Media" },
+  { id: "traction",     label: "Traction" },
+  { id: "team",         label: "Team" },
+  { id: "contact",      label: "Contact" },
 ];
 
 export function SectionProgress() {
-  const [active, setActive] = useState("hero");
+  const [active,    setActive]    = useState("hero");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
+          if (entry.isIntersecting) setActive(entry.target.id);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.45 }
     );
 
     sections.forEach(({ id }) => {
@@ -54,50 +49,71 @@ export function SectionProgress() {
   };
 
   return (
-    <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-3">
-      {sections.map(({ id, label }) => (
-        <div
-          key={id}
-          className="relative flex items-center justify-end gap-3"
-          onMouseEnter={() => setHoveredId(id)}
-          onMouseLeave={() => setHoveredId(null)}
-        >
-          <AnimatePresence>
-            {hoveredId === id && (
-              <motion.span
-                className="text-xs font-medium text-slate-400 whitespace-nowrap"
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
-                transition={{ duration: 0.2 }}
-              >
-                {label}
-              </motion.span>
-            )}
-          </AnimatePresence>
-          <button
-            onClick={() => scrollTo(id)}
-            className="relative w-2 h-2 flex items-center justify-center"
+    <div className="fixed right-5 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-end gap-2">
+      {sections.map(({ id, label }) => {
+        const isActive = active === id;
+        const isHovered = hoveredId === id;
+
+        return (
+          <div
+            key={id}
+            className="relative flex items-center justify-end gap-3"
+            onMouseEnter={() => setHoveredId(id)}
+            onMouseLeave={() => setHoveredId(null)}
           >
-            <motion.span
-              className="block rounded-full"
-              animate={{
-                width: active === id ? "8px" : "6px",
-                height: active === id ? "8px" : "6px",
-                backgroundColor:
-                  active === id
+            {/* Label tooltip */}
+            <AnimatePresence>
+              {isHovered && (
+                <motion.div
+                  className="glass rounded-lg px-2.5 py-1 border border-white/10"
+                  initial={{ opacity: 0, x: 8, scale: 0.9 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  exit={{ opacity: 0, x: 8, scale: 0.9 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                >
+                  <span className="text-[10px] font-semibold text-slate-300 whitespace-nowrap uppercase tracking-widest">
+                    {label}
+                  </span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Dot button */}
+            <button
+              onClick={() => scrollTo(id)}
+              className="relative flex items-center justify-center w-5 h-5"
+              aria-label={`Go to ${label}`}
+            >
+              {/* Pulse ring for active */}
+              {isActive && (
+                <motion.span
+                  className="absolute inset-0 rounded-full border border-teal/40"
+                  animate={{ scale: [1, 1.8], opacity: [0.8, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
+                />
+              )}
+
+              {/* Dot */}
+              <motion.span
+                className="block rounded-full"
+                animate={{
+                  width:  isActive ? "10px" : isHovered ? "8px" : "5px",
+                  height: isActive ? "10px" : isHovered ? "8px" : "5px",
+                  backgroundColor: isActive
                     ? "rgb(45,212,191)"
-                    : "rgba(255,255,255,0.2)",
-                boxShadow:
-                  active === id
-                    ? "0 0 8px rgba(45,212,191,0.6)"
+                    : isHovered
+                    ? "rgba(255,255,255,0.5)"
+                    : "rgba(255,255,255,0.18)",
+                  boxShadow: isActive
+                    ? "0 0 12px rgba(45,212,191,0.7), 0 0 24px rgba(45,212,191,0.3)"
                     : "none",
-              }}
-              transition={{ duration: 0.3 }}
-            />
-          </button>
-        </div>
-      ))}
+                }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              />
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 }

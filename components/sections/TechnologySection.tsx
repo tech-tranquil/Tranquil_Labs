@@ -1,114 +1,40 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { Cpu, Brain, Users, Layers } from "lucide-react";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { staggerContainer, fadeUp, viewportOnce } from "@/lib/animations";
-
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+import { CardSpotlight } from "@/components/ui/CardSpotlight";
+import { viewportOnce } from "@/lib/animations";
 
 const pipeline = [
-  { id: "input", label: "User Input", sub: "Voice, Text, Biometrics", icon: Users, color: "#64748b" },
-  { id: "behavioral", label: "Behavioral Engine", sub: "Pattern Recognition & LBM", icon: Brain, color: "#2dd4bf" },
-  { id: "neural", label: "Neural AI System", sub: "LLM + Contextual Reasoning", icon: Cpu, color: "#a78bfa" },
-  { id: "emotion", label: "Emotion Intelligence", sub: "Sentiment & State Detection", icon: Layers, color: "#f59e0b" },
-  { id: "response", label: "Response Generation", sub: "Personalized, Empathetic Output", icon: Brain, color: "#4ade80" },
+  { id: "input",      label: "User Input",           sub: "Voice, Text, Biometrics",         icon: Users,  color: "#94a3b8", rgb: "148,163,184" },
+  { id: "behavioral", label: "Behavioral Engine",     sub: "Pattern Recognition & LBM",       icon: Brain,  color: "#2dd4bf", rgb: "45,212,191"  },
+  { id: "neural",     label: "Neural AI System",      sub: "LLM + Contextual Reasoning",      icon: Cpu,    color: "#a78bfa", rgb: "167,139,250" },
+  { id: "emotion",    label: "Emotion Intelligence",  sub: "Sentiment & State Detection",     icon: Layers, color: "#f59e0b", rgb: "245,158,11"  },
+  { id: "response",   label: "Response Generation",   sub: "Personalized, Empathetic Output", icon: Brain,  color: "#4ade80", rgb: "74,222,128"  },
 ];
 
 const techPillars = [
-  {
-    title: "Adaptive AI Models",
-    desc: "Proprietary Large Behavioral Models (LBMs) that understand emotional context, not just words.",
-    color: "teal",
-    bg: "bg-teal/10 border-teal/20",
-    glow: "shadow-glow-teal",
-    icon: Brain,
-  },
-  {
-    title: "Behavioral Analytics",
-    desc: "Deep temporal pattern recognition tracking thousands of behavioral signals over time.",
-    color: "lavender",
-    bg: "bg-lavender/10 border-lavender/20",
-    glow: "shadow-glow-lavender",
-    icon: Layers,
-  },
-  {
-    title: "Human-Centered Design",
-    desc: "Every model output is measured against human flourishing metrics, not engagement metrics.",
-    color: "blue",
-    bg: "bg-primary/10 border-primary/20",
-    glow: "shadow-glow-primary",
-    icon: Users,
-  },
+  { title: "Adaptive AI Models",    desc: "Proprietary Large Behavioral Models (LBMs) that understand emotional context, not just words.",                         rgb: "45,212,191",  icon: Brain,  iconColor: "text-teal",      iconBg: "from-teal/20 to-teal/5"         },
+  { title: "Behavioral Analytics",  desc: "Deep temporal pattern recognition tracking thousands of behavioral signals over time.",                                  rgb: "167,139,250", icon: Layers, iconColor: "text-lavender",  iconBg: "from-lavender/20 to-lavender/5" },
+  { title: "Human-Centered Design", desc: "Every model output is measured against human flourishing metrics, not engagement metrics.",                              rgb: "96,165,250",  icon: Users,  iconColor: "text-blue-400", iconBg: "from-blue-400/20 to-blue-400/5" },
 ];
+
+// Fixed row height for guaranteed line alignment
+const ROW_H  = 140;
+const NODE_W = 56; // w-14 = 56px
+const LINE_TOP    = ROW_H / 2;
+const LINE_HEIGHT = (pipeline.length - 1) * ROW_H;
+const DOT_TRAVEL  = LINE_HEIGHT;
 
 export function TechnologySection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
-  const dotsRef = useRef<SVGCircleElement[]>([]);
-  const reduced = useReducedMotion();
-
-  useEffect(() => {
-    if (reduced || !pathRef.current) return;
-
-    const numDots = 3;
-    const ctx = gsap.context(() => {
-      // Animate path drawing
-      const len = pathRef.current!.getTotalLength();
-      gsap.set(pathRef.current, { strokeDasharray: len, strokeDashoffset: len });
-      gsap.to(pathRef.current, {
-        strokeDashoffset: 0,
-        duration: 1.5,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 65%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      // Glowing dots travel along path
-      dotsRef.current.forEach((dot, i) => {
-        if (!dot || !pathRef.current) return;
-        gsap.to(dot, {
-          motionPath: {
-            path: pathRef.current,
-            align: pathRef.current,
-            autoRotate: false,
-            start: 0,
-            end: 1,
-          },
-          duration: 3,
-          delay: i * 1,
-          repeat: -1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 65%",
-            toggleActions: "play pause resume pause",
-          },
-        });
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [reduced]);
 
   return (
     <section ref={sectionRef} id="technology" className="section-padding relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-surface/20 to-background pointer-events-none" />
-
       <div className="section-container">
-        <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewportOnce}
-          transition={{ duration: 0.7 }}
-        >
+
+        {/* ── Header ── */}
+        <div className="text-center mb-20">
           <div className="pill-badge bg-primary/10 border border-primary/20 text-blue-400 mb-6">
             Our Technology
           </div>
@@ -120,118 +46,200 @@ export function TechnologySection() {
             A vertically integrated AI stack from raw behavioral signals to emotionally
             intelligent responses — purpose-built for mental wellness at scale.
           </p>
-        </motion.div>
+        </div>
 
-        {/* Tech Pillars */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-6 mb-24"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          variants={staggerContainer}
-        >
+        {/* ── Tech Pillars ── */}
+        <div className="grid md:grid-cols-3 gap-5 mb-28">
           {techPillars.map((p) => {
             const Icon = p.icon;
             return (
               <motion.div
                 key={p.title}
-                variants={fadeUp}
-                className={`glass rounded-2xl p-8 border ${p.bg} ${p.glow} group`}
-                whileHover={{ y: -6, scale: 1.01 }}
-                transition={{ duration: 0.3 }}
+                className="group relative rounded-2xl bg-[#0f1117]"
+                style={{
+                  border: `1px solid rgba(${p.rgb}, 0.15)`,
+                  boxShadow: "0 2px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)",
+                }}
+                whileHover={{
+                  y: -5,
+                  borderColor: `rgba(${p.rgb}, 0.45)`,
+                  boxShadow: `0 20px 60px -12px rgba(${p.rgb}, 0.2), inset 0 1px 0 rgba(255,255,255,0.07)`,
+                  transition: { duration: 0.25 },
+                }}
               >
-                <div className={`w-12 h-12 rounded-xl ${p.bg} border flex items-center justify-center mb-5`}>
-                  <Icon className={`w-6 h-6 text-${p.color}`} />
-                </div>
-                <h3 className="text-xl font-bold mb-3">{p.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{p.desc}</p>
+                <div
+                  className="absolute top-0 inset-x-0 h-px rounded-t-2xl"
+                  style={{ background: `linear-gradient(90deg, transparent, rgba(${p.rgb},0.9) 50%, transparent)` }}
+                />
+                <CardSpotlight color={p.rgb} size={280} className="h-full rounded-2xl">
+                  <div className="p-7 flex flex-col gap-5">
+                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${p.iconBg} flex items-center justify-center`}>
+                      <Icon className={`w-5 h-5 ${p.iconColor}`} strokeWidth={1.75} />
+                    </div>
+                    <div>
+                      <h3 className="text-[17px] font-bold text-white mb-2">{p.title}</h3>
+                      <p className="text-[13px] text-slate-400 leading-relaxed">{p.desc}</p>
+                    </div>
+                  </div>
+                </CardSpotlight>
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
 
-        {/* Pipeline visualization */}
+        {/* ── Pipeline ── */}
         <div className="max-w-2xl mx-auto">
-          <motion.h3
-            className="text-center text-2xl font-bold mb-12 text-slate-300"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={viewportOnce}
+          <div className="text-center mb-14">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-teal/70 mb-2">Data Flow</p>
+            <h3 className="text-2xl font-bold text-slate-200">The Intelligence Pipeline</h3>
+          </div>
+
+          {/* Fixed-height grid so the line is pixel-perfect */}
+          <div
+            className="relative"
+            style={{ height: pipeline.length * ROW_H }}
           >
-            The Intelligence Pipeline
-          </motion.h3>
+            {/* ── Vertical line ── */}
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 w-[2px] origin-top z-0"
+              style={{
+                top: LINE_TOP,
+                height: LINE_HEIGHT,
+                background:
+                  "linear-gradient(to bottom, #94a3b840, #2dd4bfaa 25%, #a78bfaaa 50%, #f59e0baa 75%, #4ade80aa)",
+                filter: "blur(0.5px)",
+              }}
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={viewportOnce}
+              transition={{ duration: 1.6, ease: "easeOut" }}
+            />
 
-          <div className="relative">
-            {/* SVG path + animated dots */}
-            <svg
-              className="absolute left-1/2 top-6 -translate-x-1/2 pointer-events-none"
-              width="2"
-              style={{ height: `${(pipeline.length - 1) * 100}px` }}
-            >
-              <path
-                ref={pathRef}
-                d={`M 1 0 L 1 ${(pipeline.length - 1) * 100}`}
-                fill="none"
-                stroke="rgba(45,212,191,0.3)"
-                strokeWidth="1.5"
+            {/* ── Traveling dots ── */}
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                className="absolute left-1/2 -translate-x-1/2 w-[10px] h-[10px] rounded-full z-20 pointer-events-none"
+                style={{
+                  top: LINE_TOP - 5,
+                  background: "#2dd4bf",
+                  boxShadow: "0 0 8px 2px rgba(45,212,191,0.9), 0 0 20px 4px rgba(45,212,191,0.4)",
+                }}
+                animate={{ y: [0, DOT_TRAVEL] }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Infinity,
+                  ease: "linear",
+                  delay: i * 1.15,
+                  repeatDelay: 0,
+                }}
               />
-              {/* Travelling dots */}
-              {[0, 1, 2].map((i) => (
-                <circle
-                  key={i}
-                  ref={(el) => { if (el) dotsRef.current[i] = el; }}
-                  r="4"
-                  fill="#2dd4bf"
-                  style={{ filter: "drop-shadow(0 0 4px rgba(45,212,191,0.8))" }}
-                />
-              ))}
-            </svg>
+            ))}
 
-            <div className="space-y-[52px]">
-              {pipeline.map((stage, i) => {
-                const Icon = stage.icon;
-                return (
-                  <motion.div
-                    key={stage.id}
-                    className={`flex items-center gap-6 ${i % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
-                    initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={viewportOnce}
-                    transition={{ delay: i * 0.12, duration: 0.6 }}
-                  >
-                    <div className="flex-1">
-                      <div
-                        className={`glass rounded-xl p-5 border ${
-                          i % 2 === 0 ? "mr-10 text-right" : "ml-10"
-                        }`}
-                        style={{ borderColor: `${stage.color}30` }}
+            {/* ── Stage rows ── */}
+            {pipeline.map((stage, i) => {
+              const Icon   = stage.icon;
+              const isLeft = i % 2 === 0;
+
+              return (
+                <motion.div
+                  key={stage.id}
+                  className="absolute inset-x-0 flex items-center"
+                  style={{ top: i * ROW_H, height: ROW_H }}
+                  initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={viewportOnce}
+                  transition={{ delay: i * 0.1, duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
+                  {/* Card — left or right */}
+                  {isLeft ? (
+                    <div className="flex-1 flex items-center justify-end pr-3">
+                      <motion.div
+                        className="relative rounded-xl bg-[#0f1117] overflow-hidden w-full max-w-[220px]"
+                        style={{ border: `1px solid ${stage.color}25` }}
+                        whileHover={{ borderColor: `${stage.color}60`, boxShadow: `0 6px 24px -6px ${stage.color}35`, transition: { duration: 0.2 } }}
                       >
-                        <h4 className="font-bold mb-1" style={{ color: stage.color }}>
-                          {stage.label}
-                        </h4>
-                        <p className="text-slate-500 text-xs">{stage.sub}</p>
-                      </div>
+                        <div
+                          className="absolute top-0 inset-x-0 h-px"
+                          style={{ background: `linear-gradient(90deg, transparent, ${stage.color}80 60%, transparent)` }}
+                        />
+                        <div className="p-4 text-right">
+                          <p className="text-[9px] font-bold uppercase tracking-[0.15em] opacity-40 mb-0.5" style={{ color: stage.color }}>
+                            {String(i + 1).padStart(2, "0")}
+                          </p>
+                          <h4 className="font-bold text-[14px] leading-snug mb-0.5" style={{ color: stage.color }}>{stage.label}</h4>
+                          <p className="text-slate-500 text-[11px]">{stage.sub}</p>
+                        </div>
+                      </motion.div>
                     </div>
+                  ) : (
+                    <div className="flex-1" />
+                  )}
 
-                    {/* Center node */}
+                  {/* Horizontal arm — left */}
+                  <div
+                    className="w-8 h-px flex-shrink-0"
+                    style={{ background: isLeft ? `linear-gradient(to right, transparent, ${stage.color}50)` : "transparent" }}
+                  />
+
+                  {/* Center node */}
+                  <div className="relative flex-shrink-0 z-10" style={{ width: NODE_W, height: NODE_W }}>
+                    {/* Pulse ring */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full"
+                      style={{ border: `1px solid ${stage.color}50` }}
+                      animate={{ scale: [1, 1.6, 1], opacity: [0.5, 0, 0.5] }}
+                      transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.5, ease: "easeInOut" }}
+                    />
+                    {/* Node body */}
                     <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 border z-10"
+                      className="absolute inset-[5px] rounded-full flex items-center justify-center border"
                       style={{
-                        backgroundColor: `${stage.color}15`,
-                        borderColor: `${stage.color}40`,
-                        boxShadow: `0 0 20px ${stage.color}30`,
+                        background: `radial-gradient(circle at 40% 40%, ${stage.color}28, ${stage.color}0a)`,
+                        borderColor: `${stage.color}60`,
+                        boxShadow: `0 0 18px ${stage.color}40, inset 0 0 12px ${stage.color}10`,
                       }}
                     >
-                      <Icon className="w-5 h-5" style={{ color: stage.color }} />
+                      <Icon className="w-4 h-4" style={{ color: stage.color }} />
                     </div>
+                  </div>
 
+                  {/* Horizontal arm — right */}
+                  <div
+                    className="w-8 h-px flex-shrink-0"
+                    style={{ background: !isLeft ? `linear-gradient(to left, transparent, ${stage.color}50)` : "transparent" }}
+                  />
+
+                  {/* Card — right */}
+                  {!isLeft ? (
+                    <div className="flex-1 flex items-center justify-start pl-3">
+                      <motion.div
+                        className="relative rounded-xl bg-[#0f1117] overflow-hidden w-full max-w-[220px]"
+                        style={{ border: `1px solid ${stage.color}25` }}
+                        whileHover={{ borderColor: `${stage.color}60`, boxShadow: `0 6px 24px -6px ${stage.color}35`, transition: { duration: 0.2 } }}
+                      >
+                        <div
+                          className="absolute top-0 inset-x-0 h-px"
+                          style={{ background: `linear-gradient(90deg, transparent, ${stage.color}80 40%, transparent)` }}
+                        />
+                        <div className="p-4 text-left">
+                          <p className="text-[9px] font-bold uppercase tracking-[0.15em] opacity-40 mb-0.5" style={{ color: stage.color }}>
+                            {String(i + 1).padStart(2, "0")}
+                          </p>
+                          <h4 className="font-bold text-[14px] leading-snug mb-0.5" style={{ color: stage.color }}>{stage.label}</h4>
+                          <p className="text-slate-500 text-[11px]">{stage.sub}</p>
+                        </div>
+                      </motion.div>
+                    </div>
+                  ) : (
                     <div className="flex-1" />
-                  </motion.div>
-                );
-              })}
-            </div>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
+
       </div>
     </section>
   );

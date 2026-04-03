@@ -1,76 +1,71 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { staggerContainer, fadeUp, viewportOnce } from "@/lib/animations";
 
 const projects = [
   {
-    title: "Tranquil AI — Mental Wellness Platform",
-    category: "AI Solutions",
-    tags: ["iOS", "Android", "LLM", "CBT"],
-    desc: "AI-powered mental wellness companion with CBT support, mood analytics, and personalized meditation. 1,000+ users.",
+    title: "ChatAstro",
+    subtitle: "AI Conversational Astrology Platform",
+    stack: ["Node.js", "Flask", "PostgreSQL", "Flutter", "Docker", "Gen AI"],
+    tagline: "Real-time personalized astrological insights via conversational AI.",
+    desc: "Hybrid Node.js + Flask backend for AI astrology. Integrated Divine APIs for precise planetary calculations, engineered stateful conversational workflows with advanced prompt engineering, and deployed containerized microservices with fault-tolerant APIs.",
+    link: "https://chats.chatastro.ai/",
     color: "teal",
-    status: "Live",
   },
   {
-    title: "AI Behavioral Prediction Engine",
-    category: "AI Solutions",
-    tags: ["Python", "LBM", "TensorFlow", "FastAPI"],
-    desc: "Proprietary Large Behavioral Models predicting emotional states from subtle digital patterns.",
+    title: "PhoenixHub",
+    subtitle: "Full-Stack CRM System",
+    stack: ["Node.js", "PostgreSQL", "REST APIs", "Cloud"],
+    tagline: "End-to-end lead lifecycle management with automated workflows.",
+    desc: "Custom CRM built from scratch with multi-tenant architecture, modular RBAC for fine-grained permissions, scalable RESTful APIs for pipeline management, and real-time analytics dashboards optimized for high-throughput reporting.",
+    link: "https://www.phoenixhub.in/",
     color: "lavender",
-    status: "In Progress",
   },
   {
-    title: "Enterprise Wellness Dashboard",
-    category: "Consultancy",
-    tags: ["React", "Next.js", "Analytics", "HR Integration"],
-    desc: "Team mental health monitoring and wellness analytics for Fortune 500 HR departments.",
+    title: "Political Campaign Dashboard",
+    subtitle: "Enterprise RBAC Analytics Platform",
+    stack: ["PostgreSQL", "Data Analytics", "Secure Middleware"],
+    tagline: "Hierarchical RBAC analytics for political campaign operations.",
+    desc: "Constituency-level analytics pipelines tracking voter engagement and campaign metrics. Engineered hierarchical RBAC supporting multiple admin levels, secure middleware for data isolation, and real-time dashboards for decision-making.",
+    link: "https://pulse.esoftinnovations.in/",
     color: "blue",
-    status: "Beta",
   },
   {
-    title: "Sleep AI Composer",
-    category: "AI Solutions",
-    tags: ["Audio AI", "Generative", "iOS"],
-    desc: "Generative AI that composes personalized sleep soundscapes based on your biometric and stress profile.",
+    title: "Malayalam Voter OCR Pipeline",
+    subtitle: "Document Intelligence Automation",
+    stack: ["Python", "PyTesseract", "Google Document AI"],
+    tagline: "Large-scale OCR extraction from Malayalam voter documents.",
+    desc: "Hybrid OCR pipeline combining PyTesseract and Google Cloud Document AI with confidence-scoring validation. Applied advanced image preprocessing — noise reduction, adaptive binarization, layout segmentation — for high-accuracy bulk extraction.",
+    color: "green",
+  },
+  {
+    title: "PetCare SaaS",
+    subtitle: "Pet Management Platform",
+    stack: ["Full-Stack Web", "Cloud", "REST APIs"],
+    tagline: "SaaS platform for scheduling and tracking pet care activities.",
+    desc: "Full-stack pet management platform with activity scheduling, health tracking, reminders and notifications. Built a scalable cloud-deployed backend for continuous availability and seamless multi-pet management.",
+    link: "https://petcaresaas.onrender.com/",
     color: "teal",
-    status: "Alpha",
   },
   {
-    title: "HealthTech AI Integration",
-    category: "Consultancy",
-    tags: ["HIPAA", "EHR", "LLM", "Healthcare"],
-    desc: "AI integration for a leading US health-tech company — clinical documentation and patient triage automation.",
+    title: "CPM Hub",
+    subtitle: "Football Academy Management System",
+    stack: ["Full-Stack", "RBAC", "Analytics"],
+    tagline: "Comprehensive sports management for football academies.",
+    desc: "Multi-role platform (Admin, Coach, Parent, Student) with RBAC dashboards, training modules, homework assignment, performance analytics, and communication workflows — enabling end-to-end digital academy management.",
     color: "lavender",
-    status: "NDA",
-  },
-  {
-    title: "Cognitive Load Optimizer",
-    category: "Consultancy",
-    tags: ["Neuro-tech", "Wearables", "ML"],
-    desc: "Real-time cognitive load monitoring system for a deep-tech startup. Reduces meeting fatigue by 40%.",
-    color: "blue",
-    status: "Live",
   },
 ];
 
-const filters = ["All", "AI Solutions", "Consultancy"];
-
 const colorMap = {
-  teal: { text: "text-teal", bg: "bg-teal/10 border-teal/20", badge: "bg-teal/10 text-teal" },
-  lavender: { text: "text-lavender", bg: "bg-lavender/10 border-lavender/20", badge: "bg-lavender/10 text-lavender" },
-  blue: { text: "text-blue-400", bg: "bg-primary/10 border-primary/20", badge: "bg-primary/10 text-blue-400" },
+  teal:    { rgb: "45,212,191",  icon: "text-teal",      tag: "bg-teal/10 text-teal border-teal/20",           accent: "from-teal/50 to-transparent",     border: "rgba(45,212,191,0.18)"  },
+  lavender:{ rgb: "167,139,250", icon: "text-lavender",  tag: "bg-lavender/10 text-lavender border-lavender/20",accent: "from-lavender/50 to-transparent", border: "rgba(167,139,250,0.18)" },
+  blue:    { rgb: "96,165,250",  icon: "text-blue-400",  tag: "bg-blue-400/10 text-blue-400 border-blue-400/20",accent: "from-blue-400/50 to-transparent",  border: "rgba(96,165,250,0.18)"  },
+  green:   { rgb: "74,222,128",  icon: "text-green-400", tag: "bg-green-400/10 text-green-400 border-green-400/20",accent: "from-green-400/50 to-transparent",border: "rgba(74,222,128,0.18)"  },
 };
 
 export function ProjectsSection() {
-  const [active, setActive] = useState("All");
-
-  const filtered =
-    active === "All"
-      ? projects
-      : projects.filter((p) => p.category === active);
-
   return (
     <section id="projects" className="section-padding bg-gradient-to-b from-background to-surface/20">
       <div className="section-container">
@@ -85,66 +80,101 @@ export function ProjectsSection() {
             Work
           </div>
           <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
-            Projects we're <span className="gradient-text-teal">proud of</span>
+            Projects we&apos;re <span className="gradient-text-teal">proud of</span>
           </h2>
+          <p className="text-slate-500 text-sm mt-2">Hover a card to see more</p>
         </motion.div>
 
-        {/* Filter tabs */}
-        <div className="flex justify-center gap-3 mb-12">
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
-                active === f
-                  ? "bg-teal text-background"
-                  : "glass border border-white/10 text-slate-400 hover:text-white"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
-
-        {/* Grid */}
         <motion.div
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-          layout
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
           variants={staggerContainer}
         >
-          <AnimatePresence>
-            {filtered.map((p) => {
-              const c = colorMap[p.color as keyof typeof colorMap];
-              return (
-                <motion.div
-                  key={p.title}
-                  layout
-                  variants={fadeUp}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className={`glass rounded-2xl p-6 border ${c.bg} group hover:scale-[1.02] transition-transform duration-300 cursor-pointer`}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <span className={`text-xs font-bold uppercase tracking-wider px-2 py-1 rounded ${c.badge}`}>
-                      {p.status}
-                    </span>
-                    <ArrowUpRight className={`w-5 h-5 ${c.text} opacity-0 group-hover:opacity-100 transition-opacity`} />
+          {projects.map((p) => {
+            const c = colorMap[p.color as keyof typeof colorMap];
+            return (
+              <motion.div
+                key={p.title}
+                variants={fadeUp}
+                className="group [perspective:1000px] h-[230px] cursor-pointer"
+              >
+                {/* Flip inner */}
+                <div className="relative w-full h-full transition-transform duration-500 ease-in-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                  {/* ── FRONT ── */}
+                  <div
+                    className="absolute inset-0 rounded-2xl bg-[#0f1117] [backface-visibility:hidden] overflow-hidden flex flex-col p-6"
+                    style={{ border: `1px solid ${c.border}` }}
+                  >
+                    {/* Top accent */}
+                    <div
+                      className="absolute top-0 inset-x-0 h-px rounded-t-2xl"
+                      style={{ background: `linear-gradient(90deg, transparent, rgba(${c.rgb},0.8) 50%, transparent)` }}
+                    />
+
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-[17px] font-bold text-white leading-snug mb-0.5">{p.title}</h3>
+                        <p className={`text-[11px] font-semibold uppercase tracking-[0.1em] ${c.icon} mb-3`}>
+                          {p.subtitle}
+                        </p>
+                        <p className="text-[13px] text-slate-400 leading-relaxed">{p.tagline}</p>
+                      </div>
+
+                      {/* Stack pills */}
+                      <div className="flex flex-wrap gap-1.5 mt-4">
+                        {p.stack.map((s) => (
+                          <span
+                            key={s}
+                            className={`text-[11px] px-2 py-0.5 rounded-md border ${c.tag} font-medium`}
+                          >
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="font-bold text-lg mb-2 leading-snug">{p.title}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed mb-5">{p.desc}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-2 py-0.5 glass rounded-md text-slate-400">
-                        {tag}
-                      </span>
-                    ))}
+
+                  {/* ── BACK ── */}
+                  <div
+                    className="absolute inset-0 rounded-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] overflow-hidden flex flex-col p-6"
+                    style={{
+                      background: `linear-gradient(135deg, rgba(${c.rgb},0.12) 0%, #0f1117 50%)`,
+                      border: `1px solid rgba(${c.rgb},0.35)`,
+                    }}
+                  >
+                    {/* Top accent (brighter on back) */}
+                    <div
+                      className="absolute top-0 inset-x-0 h-px rounded-t-2xl"
+                      style={{ background: `linear-gradient(90deg, transparent, rgba(${c.rgb},1) 50%, transparent)` }}
+                    />
+
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className={`text-[13px] font-bold uppercase tracking-widest ${c.icon} mb-3`}>{p.title}</h3>
+                        <p className="text-[13px] text-slate-300 leading-relaxed">{p.desc}</p>
+                      </div>
+
+                      {p.link && (
+                        <a
+                          href={p.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`mt-4 inline-flex items-center gap-1.5 text-[12px] font-semibold ${c.icon} hover:opacity-80 transition-opacity`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          View Live <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      )}
+                    </div>
                   </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

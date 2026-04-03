@@ -82,11 +82,27 @@ export function ClosingSection() {
         <ParticleCanvas count={60} colorScheme="mixed" interactive={false} className="absolute inset-0" />
       </div>
 
+      {/* Aurora orbs */}
+      <div className="absolute inset-0 z-[1] pointer-events-none">
+        <motion.div
+          className="absolute top-1/3 left-1/4 w-[600px] h-[600px] rounded-full"
+          style={{ background: "radial-gradient(ellipse at center, rgba(45,212,191,0.06) 0%, transparent 70%)" }}
+          animate={{ scale: [1, 1.1, 1], x: [0, 30, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] rounded-full"
+          style={{ background: "radial-gradient(ellipse at center, rgba(167,139,250,0.06) 0%, transparent 70%)" }}
+          animate={{ scale: [1, 0.9, 1], x: [0, -20, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
       {/* Deep gradient overlay */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-background/70 to-background pointer-events-none" />
+      <div className="absolute inset-0 z-[2] bg-gradient-to-b from-transparent via-background/70 to-background pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-[2] section-container text-center py-32">
+      <div className="relative z-[3] section-container text-center py-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -140,21 +156,34 @@ export function ClosingSection() {
         >
           <motion.button
             onClick={() => scrollTo("tranquil-ai")}
-            className="flex items-center gap-2 bg-teal text-background px-8 py-4 rounded-xl font-bold text-lg hover:shadow-glow-teal hover:bg-teal/90 transition-all"
+            className="group relative flex items-center gap-2.5 bg-teal text-background px-8 py-4 rounded-xl font-bold text-base overflow-hidden"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                "0 0 40px -5px rgba(45,212,191,0.55), 0 0 80px -20px rgba(45,212,191,0.3)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
+            }}
           >
-            Explore Tranquil AI
-            <ArrowRight className="w-5 h-5" />
+            <span className="relative z-10 flex items-center gap-2">
+              Explore Tranquil AI
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+            <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
           </motion.button>
           <motion.button
             onClick={() => scrollTo("contact")}
-            className="flex items-center gap-2 glass border border-white/10 px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/5 transition-all"
+            className="group relative flex items-center gap-2.5 glass border border-white/10 px-8 py-4 rounded-xl font-bold text-base hover:border-white/20 hover:bg-white/[0.04] transition-all overflow-hidden"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
           >
-            Work With Us
-            <ArrowRight className="w-5 h-5" />
+            <span className="relative z-10 flex items-center gap-2">
+              Work With Us
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+            <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
           </motion.button>
         </motion.div>
 
@@ -166,7 +195,7 @@ export function ClosingSection() {
           viewport={{ once: true }}
           transition={{ delay: 1.2 }}
         >
-          Tranquil Labs Inc. — Palo Alto, CA · Bangalore, IN
+          Tranquil Labs Pvt. Ltd. — Pune · Bengaluru
         </motion.div>
       </div>
     </section>

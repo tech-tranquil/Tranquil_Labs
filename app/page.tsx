@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 
 // Lenis smooth scroll
 import { useLenis } from "@/hooks/useLenis";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { MouseSpotlight } from "@/components/ui/MouseSpotlight";
 
 // Layout
 import { Navigation } from "@/components/layout/Navigation";
@@ -65,6 +67,15 @@ export default function Home() {
 
   return (
     <main className="relative bg-background">
+      {/* Visually hidden h1 for search engine crawlers — visible heading is rendered in HeroSection */}
+      <h1 className="sr-only">
+        Tranquil Labs — AI Product Development &amp; Software Consultancy | Build AI Products, MVPs &amp; Enterprise Software
+      </h1>
+
+      {/* Global mouse effects */}
+      <CustomCursor />
+      <MouseSpotlight />
+
       {/* Cinematic intro */}
       {showIntro && <IntroScreen onComplete={handleIntroComplete} />}
 
