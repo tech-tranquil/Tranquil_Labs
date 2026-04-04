@@ -12,7 +12,7 @@ import { getLenis } from "@/hooks/useLenis";
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 const services = [
-  { icon: Cpu, label: "AI Product Development", desc: "End-to-end AI product design and engineering" },
+  { icon: Cpu, label: "Product Development", desc: "End-to-end AI product design and engineering" },
   { icon: Globe, label: "LLM Integration", desc: "GPT, Claude, Gemini & custom model integrations" },
   { icon: Zap, label: "AI Automation Systems", desc: "Intelligent workflows and process automation" },
   { icon: Layers, label: "SaaS Development", desc: "Scalable software-as-a-service platforms" },

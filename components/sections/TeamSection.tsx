@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
-import { AIThinkingIndicator } from "@/components/ui/AIThinkingIndicator";
 import { staggerContainer, fadeUp, viewportOnce } from "@/lib/animations";
 import { CardSpotlight } from "@/components/ui/CardSpotlight";
 
@@ -11,7 +10,7 @@ const team = [
     name: "Arihant Bharadwaj",
     role: "Chief Executive Officer",
     initials: "AB",
-    bio: "Serial entrepreneur and ex-Stanford AI lab researcher. Led product strategy for 3 AI startups. Believes technology should amplify human potential.",
+    bio: "CSE graduate from VIT Vellore. Serial entrepreneur. Led product strategy for 3 AI startups. Believes technology should amplify human potential.",
     focus: ["Product Strategy", "Fundraising", "AI Vision"],
     img: "/images/ari.png",
     color: "teal",
@@ -22,7 +21,7 @@ const team = [
     name: "Ritwik Tripathi",
     role: "Chief Technology Officer",
     initials: "RT",
-    bio: "MS CS from IIT Bombay. Full-stack AI engineer with deep expertise in NLP, behavioral modeling, and distributed AI systems.",
+    bio: "ECE graduate from VIT Vellore. Full-stack AI engineer with deep expertise in NLP, behavioral modeling, and distributed AI systems.",
     focus: ["AI Architecture", "LLM Engineering", "Systems Design"],
     img: "/images/Ritwik.jpg",
     color: "lavender",
@@ -33,7 +32,7 @@ const team = [
     name: "Shreyas Tiwary",
     role: "Chief Financial Officer",
     initials: "ST",
-    bio: "Background in VC-backed startup finance and venture strategy. Expert in financial modeling for AI-first companies and investor relations.",
+    bio: "CSE graduate from VIT Vellore. Background in VC-backed startup finance and venture strategy. Expert in financial modeling for AI-first companies and investor relations.",
     focus: ["Finance", "Investor Relations", "Strategy"],
     img: "/images/Pandit.jpg",
     color: "blue",
@@ -44,7 +43,7 @@ const team = [
     name: "Ashutosh Kala",
     role: "Chief Operating Officer",
     initials: "AK",
-    bio: "Operational excellence expert with experience scaling B2C consumer apps. Built and managed teams across 4 timezones.",
+    bio: "CSE graduate from VIT Vellore. Operational excellence expert with experience scaling B2C consumer apps. Built and managed teams across 4 timezones.",
     focus: ["Operations", "Growth", "Team Building"],
     img: "/images/Kala.jpg",
     color: "green",
@@ -125,7 +124,7 @@ export function TeamSection() {
             <span className="gradient-text-animated">mission</span>
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            A founding team blending deep tech, startup operations, and a genuine belief
+            A team blending deep tech, startup operations, and a genuine belief
             that technology can be calmer.
           </p>
         </motion.div>
@@ -172,7 +171,7 @@ export function TeamSection() {
                 transition={{ duration: 0.3 }}
               >
                 {/* Photo area */}
-                <div className="relative h-56 overflow-hidden bg-surface">
+                <div className="relative h-64 overflow-hidden bg-surface">
                   {/* Ambient glow orb */}
                   <motion.div
                     className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-[40px] ${c.orb}`}
@@ -191,7 +190,7 @@ export function TeamSection() {
                       style={{
                         backgroundImage: `url(${member.img})`,
                         backgroundSize: "cover",
-                        backgroundPosition: "center top",
+                        backgroundPosition: "center 10%",
                       }}
                     />
                   </motion.div>
@@ -199,32 +198,6 @@ export function TeamSection() {
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent" />
 
-                  {/* Top-right stat badge */}
-                  <motion.div
-                    className={`absolute top-3 right-3 px-2.5 py-1 rounded-lg border text-xs font-bold ${c.badge}`}
-                    animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.85, y: isHovered ? 0 : 4 }}
-                    transition={{ duration: 0.25 }}
-                  >
-                    {member.stat.value} {member.stat.label}
-                  </motion.div>
-
-                  {/* Hover name badge */}
-                  <AnimatePresence>
-                    {isHovered && (
-                      <motion.div
-                        className="absolute inset-x-0 bottom-0 p-4"
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 4 }}
-                        transition={{ duration: 0.25 }}
-                      >
-                        <div className="flex items-center gap-2">
-                          <AIThinkingIndicator active className="" />
-                          <span className="text-[11px] text-slate-400">AI thinking...</span>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
                 </div>
 
                 {/* Content */}

@@ -49,7 +49,7 @@ const aiFeatures = [
 ];
 
 const consultFeatures = [
-  { icon: Cpu,       label: "AI Product Development",  desc: "End-to-end build" },
+  { icon: Cpu,       label: "Product Development",  desc: "End-to-end build" },
   { icon: Globe,     label: "LLM Integration",          desc: "GPT, Claude, Gemini" },
   { icon: Layers,    label: "AI Automation Systems",    desc: "Workflow intelligence" },
   { icon: Code,      label: "SaaS Development",         desc: "Scalable platforms" },
@@ -319,7 +319,7 @@ export function EcosystemSection() {
         >
           <div className="h-px flex-1 max-w-[200px] bg-gradient-to-r from-transparent to-teal/20" />
           <span className="text-xs text-slate-600 font-medium uppercase tracking-widest">
-            Powered by Large Behavioral Models
+            Calm tech · Bold engineering
           </span>
           <div className="h-px flex-1 max-w-[200px] bg-gradient-to-l from-transparent to-lavender/20" />
         </motion.div>

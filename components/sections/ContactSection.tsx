@@ -6,10 +6,34 @@ import { Send, CheckCircle, Cpu, Globe, Layers, Code, Mail, ArrowRight, Sparkles
 import { slideLeft, slideRight, viewportOnce } from "@/lib/animations";
 
 const services = [
-  { icon: Cpu,    label: "AI Product Development", desc: "End-to-end AI build" },
-  { icon: Globe,  label: "AI Integrations",          desc: "GPT, Claude, Gemini" },
-  { icon: Layers, label: "LLM Fine-tuning",          desc: "Custom model training" },
-  { icon: Code,   label: "Startup Product Build",    desc: "0-to-1 execution" },
+  {
+    icon: Cpu,
+    label: "Product Development",
+    desc: "End-to-end product build",
+    detail: "From scoping to deployment, we own the full build so you can focus on the vision.",
+    rgb: "167,139,250",
+  },
+  {
+    icon: Globe,
+    label: "AI Integrations",
+    desc: "GPT, Claude, Gemini",
+    detail: "We plug powerful LLMs into your product: chatbots, search, and agents. All production-ready.",
+    rgb: "45,212,191",
+  },
+  {
+    icon: Layers,
+    label: "LLM Fine-tuning",
+    desc: "Custom model training",
+    detail: "Models trained on your data. Better accuracy, lower cost, full ownership.",
+    rgb: "96,165,250",
+  },
+  {
+    icon: Code,
+    label: "Startup Product Build",
+    desc: "0-to-1 execution",
+    detail: "No tech team? We become your engineers. Validate, build, and ship your MVP fast.",
+    rgb: "74,222,128",
+  },
 ];
 
 const reasons = [
@@ -111,19 +135,55 @@ export function ContactSection() {
             <div>
               <h3 className="text-xl font-bold mb-5 text-slate-200">What we offer</h3>
               <div className="grid grid-cols-2 gap-3">
-                {services.map(({ icon: Icon, label, desc }) => (
-                  <motion.div
+                {services.map(({ icon: Icon, label, desc, detail, rgb }) => (
+                  <div
                     key={label}
-                    className="glass rounded-2xl p-4 border border-lavender/10 hover:border-lavender/30 hover:bg-lavender/[0.04] transition-all duration-300 group card-shine"
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    transition={{ duration: 0.2 }}
+                    className="group [perspective:900px] h-[150px] cursor-pointer"
                   >
-                    <div className="w-9 h-9 bg-lavender/15 border border-lavender/20 rounded-xl flex items-center justify-center mb-3 group-hover:bg-lavender/25 transition-colors">
-                      <Icon className="w-4 h-4 text-lavender" />
+                    <div className="relative w-full h-full transition-transform duration-500 ease-in-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+
+                      {/* FRONT */}
+                      <div
+                        className="absolute inset-0 rounded-2xl bg-[#0f1117] [backface-visibility:hidden] flex flex-col p-4 overflow-hidden"
+                        style={{ border: `1px solid rgba(${rgb},0.18)` }}
+                      >
+                        <div
+                          className="absolute top-0 inset-x-0 h-px rounded-t-2xl"
+                          style={{ background: `linear-gradient(90deg, transparent, rgba(${rgb},0.7) 50%, transparent)` }}
+                        />
+                        <div
+                          className="w-9 h-9 rounded-xl flex items-center justify-center mb-3 flex-shrink-0"
+                          style={{ background: `rgba(${rgb},0.12)`, border: `1px solid rgba(${rgb},0.22)` }}
+                        >
+                          <Icon className="w-4 h-4" style={{ color: `rgb(${rgb})` }} />
+                        </div>
+                        <p className="font-bold text-[15px] text-white leading-tight">{label}</p>
+                        <p className="text-[12px] mt-0.5" style={{ color: `rgba(${rgb},0.65)` }}>{desc}</p>
+                      </div>
+
+                      {/* BACK */}
+                      <div
+                        className="absolute inset-0 rounded-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col justify-between p-4 overflow-hidden"
+                        style={{
+                          background: `linear-gradient(135deg, rgba(${rgb},0.12) 0%, #0f1117 60%)`,
+                          border: `1px solid rgba(${rgb},0.35)`,
+                        }}
+                      >
+                        <div
+                          className="absolute top-0 inset-x-0 h-px rounded-t-2xl"
+                          style={{ background: `linear-gradient(90deg, transparent, rgba(${rgb},1) 50%, transparent)` }}
+                        />
+                        <p
+                          className="text-[11px] font-bold uppercase tracking-widest mb-2"
+                          style={{ color: `rgb(${rgb})` }}
+                        >
+                          {label}
+                        </p>
+                        <p className="text-[13px] text-slate-300 leading-relaxed flex-1">{detail}</p>
+                      </div>
+
                     </div>
-                    <p className="font-semibold text-sm text-white leading-tight">{label}</p>
-                    <p className="text-[11px] text-slate-600 mt-0.5">{desc}</p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -273,7 +333,7 @@ export function ContactSection() {
                       className={`${inputClass("projectType")} bg-surface text-slate-300 cursor-pointer`}
                     >
                       <option value="">Select a service...</option>
-                      <option>AI Product Development</option>
+                      <option>Product Development</option>
                       <option>LLM Fine-tuning &amp; Integration</option>
                       <option>Startup Product Build</option>
                       <option>AI Strategy &amp; Consulting</option>

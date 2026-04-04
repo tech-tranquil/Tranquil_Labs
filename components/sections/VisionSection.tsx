@@ -12,9 +12,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const milestones = [
   {
-    year: "2023",
+    year: "Feb 2025",
     label: "Company Founded",
-    desc: "Tranquil Labs founded with a mission to build intelligent systems that support human wellbeing. Deep research into AI, behavioral science, and human-centric design began.",
+    desc: "Tranquil Labs was founded with a mission to build intelligent systems that support human wellbeing — combining AI, behavioral science, and human-centered product design from day one.",
     accent: "teal",
     dot: "bg-teal",
     border: "border-teal/20 hover:border-teal/40",
@@ -23,9 +23,9 @@ const milestones = [
     tag: "Origin",
   },
   {
-    year: "2024",
-    label: "Tranquil AI Launched",
-    desc: "Launched Tranquil AI — a CBT-powered mental wellness companion. First 10,000 users achieved. Recognized by ThingQbator & NASSCOM accelerator programs.",
+    year: "Apr 2025",
+    label: "NASSCOM Recognition",
+    desc: "Recognized by NASSCOM with a ₹5 lakh grant — validating our vision and accelerating R&D across Tranquil AI and Tranquil Consultancy.",
     accent: "lavender",
     dot: "bg-lavender",
     border: "border-lavender/20 hover:border-lavender/40",
@@ -34,9 +34,9 @@ const milestones = [
     tag: "Milestone",
   },
   {
-    year: "2025",
-    label: "AI Behavioral Prediction System",
-    desc: "Proprietary Large Behavioral Models (LBMs) in active development. Expanding Tranquil Consultancy services to enterprise clients globally.",
+    year: "Oct 2025",
+    label: "10,000 Users",
+    desc: "Crossed 10,000 users across our products and ecosystem — real traction for calm, AI-powered experiences people actually use.",
     accent: "blue",
     dot: "bg-blue-400",
     border: "border-blue-400/20 hover:border-blue-400/40",
@@ -45,7 +45,7 @@ const milestones = [
     tag: "Now",
   },
   {
-    year: "Future",
+    year: "2026",
     label: "Global AI Ecosystem",
     desc: "Building the foundational infrastructure layer for ethical, human-centered AI across every digital experience — the industry standard for responsible AI.",
     accent: "white",

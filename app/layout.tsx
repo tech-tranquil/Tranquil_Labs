@@ -149,7 +149,7 @@ const jsonLd = {
       image: { "@id": `${siteUrl}/#logo` },
       description:
         "Tranquil Labs is a full-stack AI product development studio. We design, build, and ship production-ready AI products — from MVPs to enterprise platforms. Our clients are startups, founders, and companies that need a dedicated engineering team.",
-      foundingDate: "2023",
+      foundingDate: "2025-02",
       numberOfEmployees: { "@type": "QuantitativeValue", value: 20 },
       address: [
         {
