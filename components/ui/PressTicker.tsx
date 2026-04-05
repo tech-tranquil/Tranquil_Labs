@@ -1,16 +1,14 @@
 "use client";
 
 const items = [
-  "TechCrunch",
-  "Forbes",
-  "Wired",
-  "Product Hunt",
-  "HackerNews",
+  "The Indian Express",
+  "Business Standard",
+  "StartupPedia",
+  "The Interview World",
   "NASSCOM",
-  "YourStory",
-  "Inc42",
-  "The Ken",
-  "MIT Tech Review",
+  "ThingQbator",
+  "Cisco",
+  "IIIT Bangalore",
 ];
 
 export function PressTicker() {

@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,13 +33,12 @@ export const metadata: Metadata = {
     template: "%s | Tranquil Labs",
   },
   description:
-    "Tranquil Labs is a full-stack AI product studio based in Pune & Bangalore, India. We design, build, and ship production-ready software — from MVPs to enterprise AI platforms. Hire us to build your next product.",
+    "Tranquil Labs is a full-stack AI product studio based in India. We design, build, and ship production-ready software — from MVPs to enterprise AI platforms. Hire us to build your next product.",
   keywords: [
     // Intent: hire/build
     "hire AI developers India",
     "AI product development company India",
-    "software development agency Pune",
-    "software development agency Bangalore",
+    "software development agency India",
     "build AI product",
     "hire software developers India",
     "MVP development company India",
@@ -151,20 +153,10 @@ const jsonLd = {
         "Tranquil Labs is a full-stack AI product development studio. We design, build, and ship production-ready AI products — from MVPs to enterprise platforms. Our clients are startups, founders, and companies that need a dedicated engineering team.",
       foundingDate: "2025-02",
       numberOfEmployees: { "@type": "QuantitativeValue", value: 20 },
-      address: [
-        {
-          "@type": "PostalAddress",
-          addressLocality: "Pune",
-          addressRegion: "Maharashtra",
-          addressCountry: "IN",
-        },
-        {
-          "@type": "PostalAddress",
-          addressLocality: "Bengaluru",
-          addressRegion: "Karnataka",
-          addressCountry: "IN",
-        },
-      ],
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "IN",
+      },
       areaServed: "Worldwide",
       email: "support@tranquilai.in",
       sameAs: [
@@ -307,8 +299,6 @@ const jsonLd = {
       areaServed: "Worldwide",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Pune",
-        addressRegion: "Maharashtra",
         addressCountry: "IN",
       },
       hasOfferCatalog: {
@@ -507,7 +497,7 @@ const jsonLd = {
           name: "Does Tranquil Labs work with international clients?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. While we are based in Pune and Bengaluru, India, we work with clients worldwide. We have experience collaborating with startups and enterprises across North America, Europe, and Southeast Asia.",
+            text: "Yes. While we are based in India, we work with clients worldwide. We have experience collaborating with startups and enterprises across North America, Europe, and Southeast Asia.",
           },
         },
         {
@@ -539,7 +529,7 @@ const jsonLd = {
           name: "Where is Tranquil Labs located?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Tranquil Labs is headquartered in Pune, Maharashtra with operations in Bengaluru, Karnataka. We work with clients globally and can support remote collaboration across time zones.",
+            text: "Tranquil Labs is based in India and works with clients globally, supporting remote collaboration across time zones.",
           },
         },
       ],
@@ -571,12 +561,45 @@ export default function RootLayout({
       <body className="bg-background text-slate-100 font-display overflow-x-hidden">
         {children}
 
+        {/* ── Meta Pixel ──────────────────────────────────────────────────────── */}
+        {META_PIXEL_ID && (
+          <>
+            <Script
+              id="meta-pixel"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
+                  n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                  n.queue=[];t=b.createElement(e);t.async=!0;
+                  t.src=v;s=b.getElementsByTagName(e)[0];
+                  s.parentNode.insertBefore(t,s)}(window,document,'script',
+                  'https://connect.facebook.net/en_US/fbevents.js');
+                  fbq('init','${META_PIXEL_ID}');
+                  fbq('track','PageView');
+                `,
+              }}
+            />
+            <noscript>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                height="1"
+                width="1"
+                style={{ display: "none" }}
+                src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+                alt=""
+              />
+            </noscript>
+          </>
+        )}
+
         {/* Noscript fallback — ensures key content is accessible without JS */}
         <noscript>
           <div style={{ padding: "2rem", fontFamily: "sans-serif", color: "#fff", background: "#0A0A0B" }}>
             <h1>Tranquil Labs — AI Product Development &amp; Software Consultancy</h1>
             <p>
-              Tranquil Labs is a full-stack AI product studio based in Pune &amp; Bangalore, India.
+              Tranquil Labs is a full-stack AI product studio based in India.
               We design, build, and ship production-ready software — from MVPs to enterprise AI platforms.
             </p>
             <h2>Our Services</h2>
@@ -590,7 +613,7 @@ export default function RootLayout({
             </ul>
             <h2>Contact</h2>
             <p>Email: <a href="mailto:support@tranquilai.in" style={{ color: "#2dd4bf" }}>support@tranquilai.in</a></p>
-            <p>Location: Pune &amp; Bengaluru, India</p>
+            <p>Location: India</p>
           </div>
         </noscript>
       </body>

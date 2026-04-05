@@ -89,7 +89,7 @@ const policies: Record<string, { title: string; content: React.ReactNode }> = {
         </section>
         <section>
           <h3 className="text-white font-semibold mb-2">5. Governing Law</h3>
-          <p>These terms are governed by the laws of India. Any disputes shall be subject to the jurisdiction of courts in Bangalore, Karnataka.</p>
+          <p>These terms are governed by the laws of India. Any disputes shall be subject to the jurisdiction of courts in India.</p>
         </section>
         <section>
           <h3 className="text-white font-semibold mb-2">6. Contact</h3>
@@ -231,7 +231,7 @@ export function Footer() {
             </div>
             <p className="text-slate-500 text-sm leading-relaxed max-w-xs mb-6">
               Engineering a world where technology respects human tranquility and
-              cognitive freedom. Pune · Bengaluru.
+              cognitive freedom.
             </p>
             <motion.a
               href="https://apps.apple.com/in/app/tranquil-ai/id6738845854"

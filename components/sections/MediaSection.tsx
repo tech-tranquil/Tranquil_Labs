@@ -6,31 +6,35 @@ import { staggerContainer, fadeUp, viewportOnce } from "@/lib/animations";
 
 const articles = [
   {
-    source: "YourStory",
-    date: "Jan 2025",
-    title: "How Tranquil AI is Using Emotional Intelligence to Redefine Mental Health Support",
-    excerpt: "A startup out of Palo Alto is building AI that actually listens — combining CBT principles with behavioral prediction to create personalized wellness companions.",
+    source: "The Indian Express",
+    date: "Feb 2026",
+    title: "AI health ATMs, file managers and mental health companions: How startups are transforming healthcare access and diagnostics",
+    excerpt: "A young founder from NIT Vellore is turning personal struggle into technological innovation with Tranquil AI — a platform that combines mood tracking, guided journaling, meditation support, sleep tools and an AI-driven chat feature.",
+    href: "https://indianexpress.com/article/health-wellness/ai-health-atm-file-manager-mental-health-companions-how-startups-transforming-healthcare-access-diagnostics-10541775/",
     color: "teal",
   },
   {
-    source: "Inc42",
-    date: "Feb 2025",
-    title: "Tranquil Labs Makes It to ThingQbator Cohort — NASSCOM's Flagship Accelerator",
-    excerpt: "Selected among 500+ applicants, Tranquil Labs joins NASSCOM's prestigious ThingQbator program with backing from Cisco DevNet.",
+    source: "StartupPedia",
+    date: "Nov 2025",
+    title: "Four 22-year-old VIT Vellore students turned a hackathon idea into an AI mental health app, bagged ₹5 lakh seed grant",
+    excerpt: "Tranquil AI is a mental health companion built by four VIT engineers to make emotional wellness accessible, affordable, and stigma-free by combining AI empathy with psychologist insights.",
+    href: "https://startuppedia.in/tech-innovation/four-22-year-old-vit-vellore-students-turned-a-hackathon-idea-into-an-ai-mental-health-app-bagged-5-lakh-seed-grant-10635543",
     color: "lavender",
   },
   {
-    source: "Product Hunt",
-    date: "Mar 2025",
-    title: "Tranquil AI: AI-Powered Mental Wellness Companion — Product of the Day",
-    excerpt: "Featured as Product Hunt's top mental health application, Tranquil AI brings together mood tracking, CBT, and AI-generated guidance in one calm interface.",
+    source: "The Interview World",
+    date: "Apr 2025",
+    title: "Tranquil AI Disrupting Mental Health Through Mindfulness",
+    excerpt: "In an exclusive interaction at Startup Mahakumbh, CEO Arihant Bharadwaj breaks down the technology driving Tranquil AI — trained on 70,000+ real therapy conversations to deliver genuine emotional intelligence beyond generic chatbots.",
+    href: "https://theinterview.world/tranquil-ai-disrupting-mental-health-through-mindfulness/",
     color: "blue",
   },
   {
-    source: "MIT Tech Review",
-    date: "Dec 2024",
-    title: "The Next Wave: AI Startups Building for Emotional Intelligence",
-    excerpt: "Among a new cohort of AI wellness startups, Tranquil Labs stands out with its focus on behavioral modeling over engagement optimization.",
+    source: "Business Standard",
+    date: "Apr 2025",
+    title: "Cisco and NASSCOM Foundation Honour Top 10 thingQbator Start-ups at NeoVation 2025",
+    excerpt: "Tranquil (VIT, Vellore) named among the top 10 student-led startups out of 1,367 submissions, receiving ₹5 lakh in seed funding for its AI-powered mental health support platform at the NeoVation 2025 felicitation event.",
+    href: "https://www.business-standard.com/content/press-releases-ani/cisco-and-nasscom-foundation-honour-top-10-thingqbator-start-ups-at-neovation-2025-125042500006_1.html",
     color: "teal",
   },
 ];
@@ -81,8 +85,11 @@ export function MediaSection() {
           {articles.map((a) => {
             const c = colorMap[a.color as keyof typeof colorMap];
             return (
-              <motion.div
+              <motion.a
                 key={a.title}
+                href={a.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 variants={fadeUp}
                 className={`glass rounded-2xl p-6 border ${c.border} group hover:scale-[1.01] transition-transform duration-300 cursor-pointer`}
               >
@@ -99,7 +106,7 @@ export function MediaSection() {
                   {a.title}
                 </h3>
                 <p className="text-slate-500 text-sm leading-relaxed">{a.excerpt}</p>
-              </motion.div>
+              </motion.a>
             );
           })}
         </motion.div>

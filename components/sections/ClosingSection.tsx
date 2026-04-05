@@ -195,7 +195,7 @@ export function ClosingSection() {
           viewport={{ once: true }}
           transition={{ delay: 1.2 }}
         >
-          Tranquil Labs Pvt. Ltd. — Pune · Bengaluru
+          Tranquil Labs Pvt. Ltd.
         </motion.div>
       </div>
     </section>

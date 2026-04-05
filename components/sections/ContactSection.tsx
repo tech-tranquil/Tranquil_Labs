@@ -1,9 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Send, CheckCircle, Cpu, Globe, Layers, Code, Mail, ArrowRight, Sparkles } from "lucide-react";
 import { slideLeft, slideRight, viewportOnce } from "@/lib/animations";
+
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
+function trackEvent(event: string, params?: Record<string, unknown>) {
+  if (typeof window !== "undefined" && typeof window.fbq === "function") {
+    window.fbq("track", event, params);
+  }
+}
 
 const services = [
   {
@@ -55,6 +67,24 @@ interface FormData {
 export function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Fire ViewContent once when the contact section enters the viewport
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          trackEvent("ViewContent", { content_name: "Contact Form", content_category: "Lead Gen" });
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   const {
     register,
@@ -76,7 +106,14 @@ export function ContactSection() {
         message: data.message,
       }),
     });
-    if (res.ok) setSubmitted(true);
+    if (res.ok) {
+      // Fire Meta Lead event — this is what Meta counts as a conversion
+      trackEvent("Lead", {
+        content_name: "Project Enquiry",
+        content_category: "Consultancy",
+      });
+      setSubmitted(true);
+    }
   };
 
   const inputClass = (name: string, hasError?: boolean) => `
@@ -90,7 +127,7 @@ export function ContactSection() {
   `;
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden">
+    <section ref={sectionRef} id="contact" className="section-padding relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-lavender/[0.04] via-transparent to-teal/[0.04] pointer-events-none" />
       <div
