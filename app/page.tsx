@@ -67,11 +67,6 @@ export default function Home() {
 
   return (
     <main className="relative bg-background">
-      {/* Visually hidden h1 for search engine crawlers — visible heading is rendered in HeroSection */}
-      <h1 className="sr-only">
-        Tranquil Labs — AI Product Development &amp; Software Consultancy | Build AI Products, MVPs &amp; Enterprise Software
-      </h1>
-
       {/* Global mouse effects */}
       <CustomCursor />
       <MouseSpotlight />

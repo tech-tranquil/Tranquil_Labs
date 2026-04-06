@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s | Tranquil Labs",
   },
   description:
-    "Tranquil Labs is a full-stack AI product studio based in India. We design, build, and ship production-ready software — from MVPs to enterprise AI platforms. Hire us to build your next product.",
+    "Tranquil Labs is a full-stack AI product studio based in India. We design, build, and ship production-ready software — from MVPs to enterprise AI platforms.",
   keywords: [
     // Intent: hire/build
     "hire AI developers India",
@@ -73,8 +73,9 @@ export const metadata: Metadata = {
   publisher: "Tranquil Labs",
   category: "Technology",
   applicationName: "Tranquil Labs",
-  generator: "Next.js",
   referrer: "origin-when-cross-origin",
+  // Uncomment and fill in once verified in Google Search Console:
+  // verification: { google: "YOUR_GOOGLE_VERIFICATION_CODE" },
   robots: {
     index: true,
     follow: true,
@@ -90,14 +91,45 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteUrl,
+    languages: {
+      "en-US": siteUrl,
+      "en-IN": siteUrl,
+      "x-default": siteUrl,
+    },
   },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/logo.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
-    apple: [{ url: "/logo.png", sizes: "180x180", type: "image/png" }],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
     shortcut: "/favicon.ico",
+  },
+  other: {
+    // Apple PWA
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "apple-mobile-web-app-title": "Tranquil Labs",
+    // Mobile
+    "HandheldFriendly": "True",
+    "MobileOptimized": "320",
+    // Geo — helps local/regional SEO
+    "geo.region": "IN",
+    "geo.country": "India",
+    "geo.placename": "India",
+    // Content classification
+    "classification": "Technology, Software, Artificial Intelligence",
+    "rating": "general",
+    "language": "English",
+    // Copyright
+    "copyright": `© ${new Date().getFullYear()} Tranquil Labs`,
+    // Revisit hint (for some crawlers)
+    "revisit-after": "7 days",
+    // Disable phone auto-detection formatting
+    "format-detection": "telephone=no",
   },
   manifest: "/manifest.json",
   openGraph: {
@@ -124,8 +156,8 @@ export const metadata: Metadata = {
     description:
       "We design, build, and ship production-ready AI products. Partner with Tranquil Labs to bring your vision to life.",
     images: [{ url: "/opengraph-image", alt: "Tranquil Labs OG Image" }],
-    creator: "@tranquillabs",
-    site: "@tranquillabs",
+    creator: "@tranquil_labs",
+    site: "@tranquil_labs",
   },
 };
 
@@ -156,12 +188,16 @@ const jsonLd = {
       address: {
         "@type": "PostalAddress",
         addressCountry: "IN",
+        addressRegion: "India",
       },
       areaServed: "Worldwide",
       email: "support@tranquilai.in",
+      slogan: "From Idea to Production — Powered by AI",
       sameAs: [
-        "https://twitter.com/tranquillabs",
-        "https://linkedin.com/company/tranquil-labs",
+        "https://x.com/tranquil_labs",
+        "https://twitter.com/tranquil_labs",
+        "https://www.linkedin.com/company/tranquilai01",
+        "https://www.instagram.com/tranquil_ai",
         "https://tranquilai.in",
       ],
       contactPoint: [
@@ -225,9 +261,15 @@ const jsonLd = {
       primaryImageOfPage: { "@id": `${siteUrl}/#logo` },
       breadcrumb: { "@id": `${siteUrl}/#breadcrumb` },
       inLanguage: "en-US",
+      datePublished: "2025-02-01",
+      dateModified: "2025-04-07",
       potentialAction: {
         "@type": "ReadAction",
         target: [siteUrl],
+      },
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: ["h1", "h2", ".hero-description"],
       },
     },
 
@@ -532,6 +574,38 @@ const jsonLd = {
             text: "Tranquil Labs is based in India and works with clients globally, supporting remote collaboration across time zones.",
           },
         },
+        {
+          "@type": "Question",
+          name: "How long does it take to build an AI product with Tranquil Labs?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Timeline depends on scope. A lean MVP can be designed and shipped in 4–8 weeks. Mid-size AI platforms typically take 2–4 months. We always begin with a scoping session to give you a realistic timeline before we start.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Does Tranquil Labs offer dedicated development teams?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. We offer dedicated team retainers where a full-stack squad — engineers, AI specialists, and a product manager — is assigned exclusively to your project. This is ideal for companies that need ongoing engineering capacity.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What industries does Tranquil Labs serve?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "We have built products across mental health, fintech, healthcare, political analytics, astrology, sports, and e-commerce. Our AI and engineering expertise is industry-agnostic — we adapt to your domain.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can Tranquil Labs integrate AI into my existing product?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Absolutely. We specialize in retrofitting AI into existing products — adding LLM-powered features, semantic search, recommendation engines, or intelligent automation into your current codebase without a full rebuild.",
+          },
+        },
       ],
     },
   ],
@@ -546,11 +620,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
-        {/* Preconnect for faster font load */}
+        {/* Preconnect for faster resource load */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* DNS prefetch for external services */}
         <link rel="dns-prefetch" href="https://api.web3forms.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        {/* Apple touch icon — explicit tag as belt-and-suspenders */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
 
         {/* JSON-LD Structured Data */}
         <script

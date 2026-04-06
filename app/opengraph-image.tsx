@@ -166,7 +166,7 @@ export default async function Image() {
             display: "flex",
           }}
         >
-          tranquillabs.ai
+          tranquillabs.net
         </div>
       </div>
     ),
