@@ -8,8 +8,6 @@ import { ParticleCanvas } from "@/components/ui/ParticleCanvas";
 import { getLenis } from "@/hooks/useLenis";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const wordVariants = {
   hidden: { opacity: 0, y: 40, rotateX: -25 },
   visible: (i: number) => ({
@@ -72,6 +70,8 @@ export function HeroSection() {
 
   useEffect(() => {
     if (reduced) return;
+
+    gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
       gsap.to(contentRef.current, {

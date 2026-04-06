@@ -314,12 +314,13 @@ export function Footer() {
                         <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100" />
                       </a>
                     ) : (
-                      <button
-                        onClick={() => scrollTo(link.href)}
+                      <a
+                        href={link.href}
+                        onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
                         className="text-slate-500 hover:text-teal text-sm transition-colors duration-200 text-left"
                       >
                         {link.label}
-                      </button>
+                      </a>
                     )}
                   </li>
                 ))}

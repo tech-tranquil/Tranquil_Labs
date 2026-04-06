@@ -13,6 +13,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SectionProgress } from "@/components/layout/SectionProgress";
 
 // Sections (static — fast paint)
+import { HeroSection } from "@/components/sections/HeroSection";
 import { EcosystemSection } from "@/components/sections/EcosystemSection";
 import { VisionSection } from "@/components/sections/VisionSection";
 import { UseCasesSection } from "@/components/sections/UseCasesSection";
@@ -25,14 +26,9 @@ import { TeamSection } from "@/components/sections/TeamSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { ClosingSection } from "@/components/sections/ClosingSection";
 
-// Heavy sections — dynamic import (no SSR)
+// IntroScreen and ProductDemoSection are browser-only (canvas/WebGL)
 const IntroScreen = dynamic(
   () => import("@/components/sections/IntroScreen").then((m) => ({ default: m.IntroScreen })),
-  { ssr: false }
-);
-
-const HeroSection = dynamic(
-  () => import("@/components/sections/HeroSection").then((m) => ({ default: m.HeroSection })),
   { ssr: false }
 );
 
@@ -49,8 +45,12 @@ export default function Home() {
 
   const [introComplete, setIntroComplete] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
+  // mounted tracks whether JS has run — server/initial render always shows content
+  // so crawlers and SEO checkers see the full HTML at opacity:1
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Skip intro on re-visits within same tab session
     const seen = sessionStorage.getItem("introSeen");
     if (seen) {
@@ -74,11 +74,11 @@ export default function Home() {
       {/* Cinematic intro */}
       {showIntro && <IntroScreen onComplete={handleIntroComplete} />}
 
-      {/* Main site */}
+      {/* Main site — opacity:1 on server so crawlers see all content */}
       <div
         style={{
-          opacity: introComplete ? 1 : 0,
-          transition: "opacity 0.6s ease",
+          opacity: !mounted || introComplete ? 1 : 0,
+          transition: mounted ? "opacity 0.6s ease" : "none",
         }}
       >
         <Navigation />

@@ -71,8 +71,9 @@ export function Navigation() {
           <div className="flex items-center justify-between h-16 lg:h-[72px]">
 
             {/* Logo */}
-            <button
-              onClick={() => scrollTo("#hero")}
+            <a
+              href="#hero"
+              onClick={(e) => { e.preventDefault(); scrollTo("#hero"); }}
               className="flex items-center gap-3 group"
             >
               <motion.div
@@ -86,30 +87,32 @@ export function Navigation() {
                 Tranquil{" "}
                 <span className="gradient-text-animated">Labs</span>
               </span>
-            </button>
+            </a>
 
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
-                <button
+                <a
                   key={link.label}
-                  onClick={() => scrollTo(link.href)}
+                  href={link.href}
+                  onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
                   className="relative px-4 py-2 text-sm font-medium text-slate-400 hover:text-white transition-colors duration-200 group"
                 >
                   {link.label}
                   <span className="absolute bottom-1 left-4 right-4 h-px bg-teal origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                </button>
+                </a>
               ))}
             </nav>
 
             {/* Desktop CTAs */}
             <div className="hidden lg:flex items-center gap-3">
-              <button
-                onClick={() => scrollTo("#contact")}
+              <a
+                href="#contact"
+                onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
                 className="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-2"
               >
                 Work With Us
-              </button>
+              </a>
               <motion.a
                 href="https://tranquilai.in/download/"
                 target="_blank"
@@ -183,18 +186,19 @@ export function Navigation() {
 
             <div className="flex flex-col items-center justify-center h-full gap-2 px-8">
               {navLinks.map((link, i) => (
-                <motion.button
+                <motion.a
                   key={link.label}
+                  href={link.href}
                   custom={i}
                   variants={mobileItemVariants}
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  onClick={() => scrollTo(link.href)}
+                  onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
                   className="text-2xl font-bold w-full text-center py-4 rounded-2xl text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
                 >
                   {link.label}
-                </motion.button>
+                </motion.a>
               ))}
 
               <motion.div
