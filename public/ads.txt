@@ -1,0 +1,11 @@
+# ads.txt — Authorized Digital Sellers
+# https://tranquillabs.net/ads.txt
+#
+# Tranquil Labs does not currently sell advertising inventory on this domain.
+# This file is provided to prevent unauthorized ad spoofing.
+#
+# To add authorized sellers, use the format:
+# <ad_system_domain>, <publisher_account_id>, <account_type>[, <authority_id>]
+#
+# Example (Google AdSense):
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

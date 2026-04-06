@@ -81,7 +81,7 @@ export function Navigation() {
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.2 }}
               >
-                <Image src="/logo.png" alt="Tranquil Labs Logo" width={36} height={36} className="w-full h-full object-contain" />
+                <Image src="/logo.webp" alt="Tranquil Labs Logo" width={36} height={36} className="w-full h-full object-contain" />
               </motion.div>
               <span className="font-black text-lg tracking-tight">
                 Tranquil{" "}
