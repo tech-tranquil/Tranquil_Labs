@@ -123,7 +123,7 @@ export const metadata: Metadata = {
     // Content classification
     "classification": "Technology, Software, Artificial Intelligence",
     "rating": "general",
-    "language": "English",
+    "language": "en-US",
     // Copyright
     "copyright": `© ${new Date().getFullYear()} Tranquil Labs`,
     // Revisit hint (for some crawlers)
