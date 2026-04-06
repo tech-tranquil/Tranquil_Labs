@@ -197,7 +197,7 @@ function PolicyModal({ policy, onClose }: { policy: string; onClose: () => void 
 
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-white/[0.06]">
-          <h2 className="text-lg font-bold text-white">{data.title}</h2>
+          <h3 className="text-lg font-bold text-white">{data.title}</h3>
           <button
             onClick={onClose}
             className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/[0.06] transition-colors"

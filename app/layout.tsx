@@ -30,7 +30,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Tranquil Labs | AI Product Development & Software Consultancy",
+    default: "Tranquil Labs | AI Products & Software Agency",
     template: "%s | Tranquil Labs",
   },
   description:
@@ -134,7 +134,7 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Tranquil Labs | AI Product Development & Software Consultancy",
+    title: "Tranquil Labs | AI Products & Software Agency",
     description:
       "We design, build, and ship production-ready AI products and software — from MVPs to enterprise platforms. Partner with Tranquil Labs to turn your idea into reality.",
     type: "website",
@@ -153,7 +153,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tranquil Labs | AI Product Development & Software Consultancy",
+    title: "Tranquil Labs | AI Products & Software Agency",
     description:
       "We design, build, and ship production-ready AI products. Partner with Tranquil Labs to bring your vision to life.",
     images: [{ url: "/opengraph-image", alt: "Tranquil Labs OG Image" }],

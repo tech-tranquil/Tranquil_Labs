@@ -121,11 +121,11 @@ export function VisionSection() {
             About Tranquil Labs
           </motion.div>
 
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.1] mb-10">
+          <h3 className="text-4xl md:text-6xl font-black tracking-tight leading-[1.1] mb-10">
             An{" "}
             <span className="gradient-text-animated">AI Innovation</span>{" "}
             Company
-          </h2>
+          </h3>
 
           <div className="space-y-5 text-left md:text-center">
             <p className="text-lg md:text-xl text-slate-300 font-light leading-relaxed max-w-3xl mx-auto">

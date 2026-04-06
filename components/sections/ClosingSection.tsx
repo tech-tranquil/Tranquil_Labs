@@ -116,7 +116,7 @@ export function ClosingSection() {
         </motion.div>
 
         {/* Animated words */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.2] tracking-tight mb-8 max-w-5xl mx-auto">
+        <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.2] tracking-tight mb-8 max-w-5xl mx-auto">
           {words.map((word, i) => (
             <span
               key={i}
@@ -132,7 +132,7 @@ export function ClosingSection() {
               {word}
             </span>
           ))}
-        </h2>
+        </h3>
 
         {/* Sub-line */}
         <motion.p

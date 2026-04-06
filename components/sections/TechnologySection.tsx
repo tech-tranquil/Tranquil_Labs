@@ -38,10 +38,10 @@ export function TechnologySection() {
           <div className="pill-badge bg-primary/10 border border-primary/20 text-blue-400 mb-6">
             Our Technology
           </div>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
+          <h3 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
             Intelligence that{" "}
             <span className="gradient-text-teal">feels human</span>
-          </h2>
+          </h3>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             A vertically integrated AI stack from raw behavioral signals to emotionally
             intelligent responses — purpose-built for mental wellness at scale.

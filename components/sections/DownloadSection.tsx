@@ -27,11 +27,11 @@ export function DownloadSection() {
             <div className="pill-badge bg-teal/10 border border-teal/20 text-teal mb-8">
               Download Free
             </div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
+            <h3 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
               Start your{" "}
               <span className="gradient-text-teal">wellness journey</span>
               <br />today
-            </h2>
+            </h3>
             <p className="text-slate-400 text-lg mb-10 leading-relaxed">
               Join 2,200+ users who have transformed their relationship with stress,
               anxiety, and focus using Tranquil AI.

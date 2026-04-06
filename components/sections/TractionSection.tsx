@@ -74,10 +74,10 @@ export function TractionSection() {
           <div className="pill-badge bg-green-500/10 border border-green-500/20 text-green-400 mb-6">
             Traction & Impact
           </div>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
+          <h3 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
             Real growth,{" "}
             <span className="gradient-text-teal">real impact</span>
-          </h2>
+          </h3>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             From 0 to 2,200+ users, NASSCOM recognition, and measurable mental health outcomes.
           </p>

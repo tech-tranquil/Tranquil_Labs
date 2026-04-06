@@ -56,11 +56,11 @@ export function ProblemSection() {
           <div className="pill-badge bg-red-500/10 border border-red-500/20 text-red-400 mb-6">
             The Problem
           </div>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
+          <h3 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
             Why the world needs
             <br />
             <span className="text-slate-500">a calmer technology</span>
-          </h2>
+          </h3>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             Three interconnected crises demand a fundamentally different approach to how we
             build and deploy technology.

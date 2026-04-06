@@ -92,11 +92,11 @@ export function EcosystemSection() {
             <Sparkles className="w-3 h-3" />
             Choose Your Path
           </motion.div>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
+          <h3 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
             Two ways to work
             <br />
             <span className="gradient-text-animated">with Tranquil Labs</span>
-          </h2>
+          </h3>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
             Whether you're looking for intelligent wellness tools or want to build
             AI-powered products — we have a path for you.

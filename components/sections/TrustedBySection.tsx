@@ -27,9 +27,9 @@ export function TrustedBySection() {
           <p className="text-slate-500 text-sm uppercase tracking-widest mb-8">
             Recognized & supported by
           </p>
-          <h2 className="text-3xl md:text-5xl font-black text-slate-300">
+          <h3 className="text-3xl md:text-5xl font-black text-slate-300">
             Trusted by the <span className="gradient-text-teal">ecosystem</span>
-          </h2>
+          </h3>
         </motion.div>
 
         <motion.div

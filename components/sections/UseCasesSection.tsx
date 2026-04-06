@@ -74,11 +74,11 @@ export function UseCasesSection() {
           <div className="pill-badge bg-primary/10 border border-primary/20 text-blue-400 mb-6">
             What We Build
           </div>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
+          <h3 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
             Intelligent solutions across
             <br />
             <span className="gradient-text-teal">every vertical</span>
-          </h2>
+          </h3>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             From behavioral AI to enterprise data systems, we build the full stack
             of intelligent technology.

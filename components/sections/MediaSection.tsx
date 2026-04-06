@@ -59,9 +59,9 @@ export function MediaSection() {
           <div className="pill-badge bg-teal/10 border border-teal/20 text-teal mb-6">
             Press & Media
           </div>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
+          <h3 className="text-4xl md:text-6xl font-black tracking-tight mb-6">
             The world is <span className="gradient-text-teal">listening</span>
-          </h2>
+          </h3>
         </motion.div>
 
         {/* Press ticker */}
