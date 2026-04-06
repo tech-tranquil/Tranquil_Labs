@@ -33,57 +33,40 @@ export const metadata: Metadata = {
     template: "%s | Tranquil Labs",
   },
   description:
-    "India's AI product studio. We build LLM-powered apps, ship MVPs in 4–8 weeks, and scale enterprise AI platforms. GPT-4 · Claude · Next.js. Partner with Tranquil Labs.",
+    "Tranquil Labs is a full-stack AI product studio based in India. We design, build, and ship production-ready software — from MVPs to enterprise AI platforms.",
   keywords: [
-    // High-intent hire/build
+    // Intent: hire/build
     "hire AI developers India",
     "AI product development company India",
     "software development agency India",
-    "build AI product India",
+    "build AI product",
     "hire software developers India",
     "MVP development company India",
     "custom software development India",
     "technical co-founder for hire",
     "product engineering team India",
-    "dedicated development team India",
-    "AI development agency India",
     // Services
     "AI consultancy India",
     "LLM integration development",
-    "GPT-4 integration services",
-    "Claude integration development",
-    "Gemini API development",
-    "generative AI development India",
-    "AI agent development India",
-    "RAG application development",
-    "SaaS development company India",
-    "full stack development agency India",
-    "React Next.js development India",
-    "machine learning development India",
-    "enterprise software development India",
+    "GPT integration services",
+    "SaaS development company",
+    "full stack development agency",
+    "React Next.js development",
+    "machine learning development",
+    "enterprise software development",
     "AI automation development",
-    "chatbot development India",
-    "AI startup studio India",
-    // Trust signals
-    "India AI Impact Summit startup",
-    "top AI startup India",
-    "VIT founders AI startup",
     // Brand
     "Tranquil Labs",
-    "Tranquil Labs India",
     "Tranquil AI",
-    "Tranquil AI mental health",
     "Tranquil Consultancy",
-    "mental health AI platform India",
+    "mental health AI platform",
+    "AI startup studio India",
     // Long-tail
-    "build AI MVP startup India",
+    "build AI MVP startup",
     "AI product studio India",
     "outsource software development India",
-    "startup software development partner India",
-    "AI product development agency startup India",
-    "hire AI engineers India",
-    "build LLM application India",
-    "AI SaaS startup India",
+    "startup software development partner",
+    "AI product development agency startup",
   ],
   authors: [{ name: "Tranquil Labs", url: siteUrl }],
   creator: "Tranquil Labs",
@@ -147,17 +130,6 @@ export const metadata: Metadata = {
     "revisit-after": "7 days",
     // Disable phone auto-detection formatting
     "format-detection": "telephone=no",
-    // Twitter card data labels — shown as metadata on tweet cards
-    "twitter:label1": "Founded",
-    "twitter:data1": "Feb 2025",
-    "twitter:label2": "Headquarters",
-    "twitter:data2": "India",
-    // Open Graph locale alternate for Indian audiences
-    "og:locale:alternate": "en_IN",
-    // Microsoft / Bing
-    "msapplication-TileColor": "#0A0A0B",
-    "msapplication-navbutton-color": "#2dd4bf",
-    "msapplication-starturl": "/",
   },
   manifest: "/manifest.json",
   openGraph: {
@@ -221,23 +193,6 @@ const jsonLd = {
       areaServed: "Worldwide",
       email: "support@tranquilai.in",
       slogan: "From Idea to Production — Powered by AI",
-      award: [
-        "NASSCOM Foundation thingQbator Cohort — Validated AI Startup",
-        "STPI India AI Impact Summit 2026",
-        "Cisco Validated Startup",
-      ],
-      founder: [
-        { "@id": `${siteUrl}/#person-arihant` },
-        { "@id": `${siteUrl}/#person-ritwik` },
-        { "@id": `${siteUrl}/#person-shreyas` },
-        { "@id": `${siteUrl}/#person-ashutosh` },
-      ],
-      member: [
-        { "@id": `${siteUrl}/#person-arihant` },
-        { "@id": `${siteUrl}/#person-ritwik` },
-        { "@id": `${siteUrl}/#person-shreyas` },
-        { "@id": `${siteUrl}/#person-ashutosh` },
-      ],
       sameAs: [
         "https://x.com/tranquil_labs",
         "https://twitter.com/tranquil_labs",
@@ -550,176 +505,7 @@ const jsonLd = {
       ],
     },
 
-    // 8. Person — Founder 1
-    {
-      "@type": "Person",
-      "@id": `${siteUrl}/#person-arihant`,
-      name: "Arihant Bharadwaj",
-      jobTitle: "Co-founder & CEO",
-      worksFor: { "@id": `${siteUrl}/#organization` },
-      url: "https://www.linkedin.com/in/arihant-bharadwaj/",
-      sameAs: ["https://www.linkedin.com/in/arihant-bharadwaj/"],
-      knowsAbout: [
-        "Artificial Intelligence", "Product Management",
-        "Startup Strategy", "Mental Health Technology", "Business Development",
-      ],
-    },
-
-    // 9. Person — Founder 2
-    {
-      "@type": "Person",
-      "@id": `${siteUrl}/#person-ritwik`,
-      name: "Ritwik Tripathi",
-      jobTitle: "Co-founder & CTO",
-      worksFor: { "@id": `${siteUrl}/#organization` },
-      url: "https://www.linkedin.com/in/ritwik-tripathi/",
-      sameAs: ["https://www.linkedin.com/in/ritwik-tripathi/"],
-      knowsAbout: [
-        "Software Engineering", "AI Development", "Full Stack Development",
-        "Machine Learning", "System Architecture", "Next.js",
-      ],
-    },
-
-    // 10. Person — Founder 3
-    {
-      "@type": "Person",
-      "@id": `${siteUrl}/#person-shreyas`,
-      name: "Shreyas Tiwary",
-      jobTitle: "Co-founder & CFO",
-      worksFor: { "@id": `${siteUrl}/#organization` },
-      url: "https://www.linkedin.com/in/shreyastiwary/",
-      sameAs: ["https://www.linkedin.com/in/shreyastiwary/"],
-      knowsAbout: [
-        "Financial Strategy", "Startup Finance", "Business Operations",
-        "AI Product Strategy", "Growth",
-      ],
-    },
-
-    // 11. Person — Founder 4
-    {
-      "@type": "Person",
-      "@id": `${siteUrl}/#person-ashutosh`,
-      name: "Ashutosh Kala",
-      jobTitle: "Co-founder & COO",
-      worksFor: { "@id": `${siteUrl}/#organization` },
-      url: "https://www.linkedin.com/in/kalaashutosh/",
-      sameAs: ["https://www.linkedin.com/in/kalaashutosh/"],
-      knowsAbout: [
-        "Operations", "Product Development", "AI Automation",
-        "Startup Operations", "Team Management",
-      ],
-    },
-
-    // 12. NewsArticle — Indian Express
-    {
-      "@type": "NewsArticle",
-      "@id": `${siteUrl}/#press-indian-express`,
-      headline: "AI Startups Transforming Healthcare Access in India",
-      description:
-        "Tranquil AI featured in The Indian Express for leveraging AI to make mental health support accessible across India.",
-      publisher: {
-        "@type": "NewsMediaOrganization",
-        name: "The Indian Express",
-        url: "https://indianexpress.com",
-      },
-      about: { "@id": `${siteUrl}/#organization` },
-      mentions: [
-        { "@id": `${siteUrl}/#tranquil-ai` },
-        { "@id": `${siteUrl}/#organization` },
-      ],
-      inLanguage: "en-IN",
-      datePublished: "2026-03-01",
-    },
-
-    // 13. NewsArticle — Business Standard
-    {
-      "@type": "NewsArticle",
-      "@id": `${siteUrl}/#press-business-standard`,
-      headline: "Tranquil AI: India's AI-Powered Mental Wellness Platform",
-      description:
-        "Business Standard coverage of Tranquil AI, the mental health platform built by four VIT Vellore founders reshaping digital wellness in India.",
-      publisher: {
-        "@type": "NewsMediaOrganization",
-        name: "Business Standard",
-        url: "https://www.business-standard.com",
-      },
-      about: { "@id": `${siteUrl}/#organization` },
-      mentions: { "@id": `${siteUrl}/#tranquil-ai` },
-      inLanguage: "en-IN",
-      datePublished: "2025-10-01",
-    },
-
-    // 14. NewsArticle — Startup Pedia
-    {
-      "@type": "NewsArticle",
-      "@id": `${siteUrl}/#press-startup-pedia`,
-      headline: "4 VIT Students Built Tranquil AI to Address India's Mental Health Crisis",
-      description:
-        "Startup Pedia feature on Tranquil AI, co-founded by engineering students from VIT Vellore who built India's leading AI mental wellness platform.",
-      publisher: {
-        "@type": "NewsMediaOrganization",
-        name: "Startup Pedia",
-        url: "https://startuppedia.in",
-      },
-      about: { "@id": `${siteUrl}/#organization` },
-      mentions: { "@id": `${siteUrl}/#tranquil-ai` },
-      inLanguage: "en-IN",
-      datePublished: "2025-08-01",
-    },
-
-    // 15. Event — India AI Impact Summit 2026
-    {
-      "@type": "Event",
-      "@id": `${siteUrl}/#event-ai-impact-summit-2026`,
-      name: "India AI Impact Summit 2026 — Startup Pitch Round",
-      description:
-        "Tranquil AI participated in the STPI India AI Impact Summit 2026 Startup Pitch Round at the India AI Impact Expo in New Delhi, showcasing AI-driven mental health innovation.",
-      startDate: "2026-03-01",
-      eventStatus: "https://schema.org/EventScheduled",
-      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      location: {
-        "@type": "Place",
-        name: "India AI Impact Expo, New Delhi",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "New Delhi",
-          addressCountry: "IN",
-        },
-      },
-      organizer: {
-        "@type": "Organization",
-        name: "STPI — Software Technology Parks of India",
-        url: "https://www.stpi.in",
-      },
-      performer: { "@id": `${siteUrl}/#organization` },
-    },
-
-    // 16. AboutPage
-    {
-      "@type": "AboutPage",
-      "@id": `${siteUrl}/#about-page`,
-      url: `${siteUrl}/#about`,
-      name: "About Tranquil Labs — India's AI Product Studio",
-      description:
-        "Learn about Tranquil Labs, India's full-stack AI product studio founded in 2025 by four engineers from VIT Vellore.",
-      isPartOf: { "@id": `${siteUrl}/#website` },
-      about: { "@id": `${siteUrl}/#organization` },
-      inLanguage: "en-US",
-    },
-
-    // 17. ContactPage
-    {
-      "@type": "ContactPage",
-      "@id": `${siteUrl}/#contact-page`,
-      url: `${siteUrl}/#contact`,
-      name: "Contact Tranquil Labs — Start Your AI Project",
-      description:
-        "Get in touch with Tranquil Labs to discuss your AI product, MVP, or software development project. We respond within 24 hours.",
-      isPartOf: { "@id": `${siteUrl}/#website` },
-      inLanguage: "en-US",
-    },
-
-    // 18. FAQPage — appears as rich result on Google
+    // 8. FAQPage — appears as rich result on Google
     {
       "@type": "FAQPage",
       "@id": `${siteUrl}/#faq`,
@@ -834,18 +620,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
-        {/* Preconnect — shave ~300ms off first resource request */}
+        {/* Preconnect for faster resource load */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://apps.apple.com" />
         {/* DNS prefetch for external services */}
         <link rel="dns-prefetch" href="https://api.web3forms.com" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         {/* Apple touch icon — explicit tag as belt-and-suspenders */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
-        {/* Bing / Microsoft site verification placeholder */}
-        {/* <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" /> */}
 
         {/* JSON-LD Structured Data */}
         <script
