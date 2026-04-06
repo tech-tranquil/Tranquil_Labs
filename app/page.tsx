@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
 // Lenis smooth scroll
@@ -26,12 +25,6 @@ import { TeamSection } from "@/components/sections/TeamSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { ClosingSection } from "@/components/sections/ClosingSection";
 
-// IntroScreen and ProductDemoSection are browser-only (canvas/WebGL)
-const IntroScreen = dynamic(
-  () => import("@/components/sections/IntroScreen").then((m) => ({ default: m.IntroScreen })),
-  { ssr: false }
-);
-
 const ProductDemoSection = dynamic(
   () =>
     import("@/components/sections/ProductDemoSection").then((m) => ({
@@ -43,44 +36,12 @@ const ProductDemoSection = dynamic(
 export default function Home() {
   useLenis();
 
-  const [introComplete, setIntroComplete] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
-  // mounted tracks whether JS has run — server/initial render always shows content
-  // so crawlers and SEO checkers see the full HTML at opacity:1
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    // Skip intro on re-visits within same tab session
-    const seen = sessionStorage.getItem("introSeen");
-    if (seen) {
-      setIntroComplete(true);
-      setShowIntro(false);
-    }
-  }, []);
-
-  const handleIntroComplete = () => {
-    setIntroComplete(true);
-    sessionStorage.setItem("introSeen", "1");
-    setTimeout(() => setShowIntro(false), 400);
-  };
-
   return (
     <main className="relative bg-background">
       {/* Global mouse effects */}
       <CustomCursor />
       <MouseSpotlight />
 
-      {/* Cinematic intro */}
-      {showIntro && <IntroScreen onComplete={handleIntroComplete} />}
-
-      {/* Main site — opacity:1 on server so crawlers see all content */}
-      <div
-        style={{
-          opacity: !mounted || introComplete ? 1 : 0,
-          transition: mounted ? "opacity 0.6s ease" : "none",
-        }}
-      >
         <Navigation />
         <SectionProgress />
 
@@ -124,7 +85,6 @@ export default function Home() {
         <ClosingSection />
 
         <Footer />
-      </div>
     </main>
   );
 }
