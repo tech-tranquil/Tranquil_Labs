@@ -61,6 +61,7 @@ interface FormData {
   company: string;
   email: string;
   projectType: string;
+  budget: string;
   message: string;
 }
 
@@ -89,8 +90,11 @@ export function ContactSection() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
+
+  const messageValue = watch("message", "");
 
   const onSubmit = async (data: FormData) => {
     const res = await fetch("https://api.web3forms.com/submit", {
@@ -103,6 +107,7 @@ export function ContactSection() {
         email: data.email,
         company: data.company,
         project_type: data.projectType,
+        budget: data.budget,
         message: data.message,
       }),
     });
@@ -359,23 +364,43 @@ export function ContactSection() {
                     )}
                   </div>
 
-                  <div>
-                    <label className="text-xs text-slate-400 font-semibold block mb-2 uppercase tracking-wider">
-                      Project Type
-                    </label>
-                    <select
-                      {...register("projectType")}
-                      onFocus={() => setFocusedField("projectType")}
-                      onBlur={() => setFocusedField(null)}
-                      className={`${inputClass("projectType")} bg-surface text-slate-300 cursor-pointer`}
-                    >
-                      <option value="">Select a service...</option>
-                      <option>Product Development</option>
-                      <option>LLM Fine-tuning &amp; Integration</option>
-                      <option>Startup Product Build</option>
-                      <option>AI Strategy &amp; Consulting</option>
-                      <option>Other</option>
-                    </select>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs text-slate-400 font-semibold block mb-2 uppercase tracking-wider">
+                        Project Type
+                      </label>
+                      <select
+                        {...register("projectType")}
+                        onFocus={() => setFocusedField("projectType")}
+                        onBlur={() => setFocusedField(null)}
+                        className={`${inputClass("projectType")} bg-surface text-slate-300 cursor-pointer`}
+                      >
+                        <option value="">Select a service...</option>
+                        <option>Product Development</option>
+                        <option>LLM Fine-tuning &amp; Integration</option>
+                        <option>Startup Product Build</option>
+                        <option>AI Strategy &amp; Consulting</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs text-slate-400 font-semibold block mb-2 uppercase tracking-wider">
+                        Budget (₹)
+                      </label>
+                      <select
+                        {...register("budget")}
+                        onFocus={() => setFocusedField("budget")}
+                        onBlur={() => setFocusedField(null)}
+                        className={`${inputClass("budget")} bg-surface text-slate-300 cursor-pointer`}
+                      >
+                        <option value="">Select a range...</option>
+                        <option value="below-10k">Below ₹10,000</option>
+                        <option value="10k-25k">₹10,000 – ₹25,000</option>
+                        <option value="25k-1lakh">₹25,000 – ₹1,00,000</option>
+                        <option value="1lakh-3lakh">₹1,00,000 – ₹3,00,000</option>
+                        <option value="5lakh+">₹5,00,000+</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div>
@@ -383,16 +408,26 @@ export function ContactSection() {
                       Tell us about your project *
                     </label>
                     <textarea
-                      {...register("message", { required: "Required" })}
+                      {...register("message", {
+                        required: "Please describe your project",
+                        minLength: { value: 50, message: "Please add a bit more detail (min 50 characters)" },
+                      })}
                       rows={4}
                       placeholder="Describe your vision, timeline, and goals..."
                       onFocus={() => setFocusedField("message")}
                       onBlur={() => setFocusedField(null)}
                       className={`${inputClass("message", !!errors.message)} resize-none`}
                     />
-                    {errors.message && (
-                      <p className="text-red-400 text-xs mt-1.5">{errors.message.message}</p>
-                    )}
+                    <div className="flex items-center justify-between mt-1.5">
+                      {errors.message ? (
+                        <p className="text-red-400 text-xs">{errors.message.message}</p>
+                      ) : (
+                        <span />
+                      )}
+                      <p className={`text-xs ml-auto ${(messageValue?.length ?? 0) >= 50 ? "text-teal" : "text-slate-500"}`}>
+                        {messageValue?.length ?? 0} / 50
+                      </p>
+                    </div>
                   </div>
 
                   <motion.button
