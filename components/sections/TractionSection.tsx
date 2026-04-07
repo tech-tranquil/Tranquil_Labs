@@ -15,24 +15,27 @@ import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { staggerContainer, fadeUp, viewportOnce } from "@/lib/animations";
 
 const userGrowthData = [
-  { month: "Aug", users: 120 },
-  { month: "Sep", users: 340 },
-  { month: "Oct", users: 620 },
-  { month: "Nov", users: 890 },
-  { month: "Dec", users: 1100 },
-  { month: "Jan", users: 1400 },
-  { month: "Feb", users: 1800 },
-  { month: "Mar", users: 2200 },
+  { month: "Aug '24", users: 120 },
+  { month: "Oct '24", users: 900 },
+  { month: "Dec '24", users: 2200 },
+  { month: "Feb '25", users: 5500 },
+  { month: "Apr '25", users: 10500 },
+  { month: "Jun '25", users: 17000 },
+  { month: "Aug '25", users: 25000 },
+  { month: "Oct '25", users: 32000 },
+  { month: "Dec '25", users: 37000 },
+  { month: "Feb '26", users: 39500 },
+  { month: "Apr '26", users: 40000 },
 ];
 
 const dauData = [
-  { day: "Mon", dau: 410 },
-  { day: "Tue", dau: 520 },
-  { day: "Wed", dau: 490 },
-  { day: "Thu", dau: 610 },
-  { day: "Fri", dau: 570 },
-  { day: "Sat", dau: 680 },
-  { day: "Sun", dau: 640 },
+  { day: "Mon", dau: 9200 },
+  { day: "Tue", dau: 11500 },
+  { day: "Wed", dau: 10800 },
+  { day: "Thu", dau: 13200 },
+  { day: "Fri", dau: 12400 },
+  { day: "Sat", dau: 14800 },
+  { day: "Sun", dau: 13600 },
 ];
 
 const metrics = [
@@ -79,7 +82,7 @@ export function TractionSection() {
             <span className="gradient-text-teal">real impact</span>
           </h3>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            From 0 to 2,200+ users, NASSCOM recognition, and measurable mental health outcomes.
+            From 0 to 40k+ users, NASSCOM recognition, and measurable mental health outcomes.
           </p>
         </motion.div>
 
@@ -95,7 +98,7 @@ export function TractionSection() {
             transition={{ duration: 0.7 }}
           >
             <h3 className="text-lg font-bold mb-1">User Growth</h3>
-            <p className="text-slate-500 text-sm mb-6">Aug 2024 — Mar 2025</p>
+            <p className="text-slate-500 text-sm mb-6">Aug 2024 — Apr 2026</p>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={userGrowthData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />

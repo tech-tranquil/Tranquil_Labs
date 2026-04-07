@@ -23,7 +23,7 @@ const wordVariants = {
 };
 
 const stats = [
-  { icon: TrendingUp, label: "Users", value: "2,200+" },
+  { icon: TrendingUp, label: "Users", value: "40k+" },
   { icon: Shield, label: "Accuracy", value: "95%" },
   { icon: Zap, label: "Response", value: "<80ms" },
 ];

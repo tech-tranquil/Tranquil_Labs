@@ -405,7 +405,7 @@ const jsonLd = {
       applicationCategory: "HealthApplication",
       operatingSystem: ["iOS", "Android"],
       description:
-        "Tranquil AI is a mental wellness platform featuring an AI companion for real-time emotional support, mood analytics, and sleep therapy. 2,200+ users, 95% accuracy rating.",
+        "Tranquil AI is a mental wellness platform featuring an AI companion for real-time emotional support, mood analytics, and sleep therapy. 40k+ users, 95% accuracy rating.",
       url: "https://tranquilai.in",
       downloadUrl: "https://apps.apple.com/in/app/tranquil-ai/id6738845854",
       offers: {
@@ -548,7 +548,7 @@ const jsonLd = {
           name: "What is Tranquil AI?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Tranquil AI is Tranquil Labs' flagship mental wellness application featuring an AI companion for emotional support, mood analytics, and sleep therapy. It has 2,200+ active users, a 95% accuracy rating, and is available on iOS and Android.",
+            text: "Tranquil AI is Tranquil Labs' flagship mental wellness application featuring an AI companion for emotional support, mood analytics, and sleep therapy. It has 40k+ active users, a 95% accuracy rating, and is available on iOS and Android.",
           },
         },
         {

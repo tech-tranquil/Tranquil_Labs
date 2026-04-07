@@ -33,7 +33,7 @@ export function DownloadSection() {
               <br />today
             </h3>
             <p className="text-slate-400 text-lg mb-10 leading-relaxed">
-              Join 2,200+ users who have transformed their relationship with stress,
+              Join 40k+ users who have transformed their relationship with stress,
               anxiety, and focus using Tranquil AI.
             </p>
 
