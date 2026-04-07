@@ -11,6 +11,32 @@ declare global {
   }
 }
 
+type Currency = "INR" | "USD" | "EUR";
+
+const budgetOptions: Record<Currency, { value: string; label: string }[]> = {
+  INR: [
+    { value: "below-10k",     label: "Below ₹10,000" },
+    { value: "10k-25k",       label: "₹10,000 – ₹25,000" },
+    { value: "25k-1lakh",     label: "₹25,000 – ₹1,00,000" },
+    { value: "1lakh-5lakh",   label: "₹1,00,000 – ₹5,00,000" },
+    { value: "5lakh+",        label: "₹5,00,000+" },
+  ],
+  USD: [
+    { value: "below-10k",     label: "Below $100" },
+    { value: "10k-25k",       label: "$100 – $300" },
+    { value: "25k-1lakh",     label: "$300 – $1,200" },
+    { value: "1lakh-5lakh",   label: "$1,200 – $6,000" },
+    { value: "5lakh+",        label: "$6,000+" },
+  ],
+  EUR: [
+    { value: "below-10k",     label: "Below €100" },
+    { value: "10k-25k",       label: "€100 – €280" },
+    { value: "25k-1lakh",     label: "€280 – €1,100" },
+    { value: "1lakh-5lakh",   label: "€1,100 – €5,500" },
+    { value: "5lakh+",        label: "€5,500+" },
+  ],
+};
+
 function trackEvent(event: string, params?: Record<string, unknown>) {
   if (typeof window !== "undefined" && typeof window.fbq === "function") {
     window.fbq("track", event, params);
@@ -68,6 +94,7 @@ interface FormData {
 export function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [currency, setCurrency] = useState<Currency>("INR");
   const sectionRef = useRef<HTMLElement>(null);
 
   // Fire ViewContent once when the contact section enters the viewport
@@ -384,9 +411,27 @@ export function ContactSection() {
                       </select>
                     </div>
                     <div>
-                      <label className="text-xs text-slate-400 font-semibold block mb-2 uppercase tracking-wider">
-                        Budget (₹)
-                      </label>
+                      <div className="flex items-center justify-between mb-2">
+                        <label className="text-xs text-slate-400 font-semibold uppercase tracking-wider">
+                          Budget
+                        </label>
+                        <div className="flex items-center gap-0.5 bg-white/[0.04] border border-white/10 rounded-lg p-0.5">
+                          {(["INR", "USD", "EUR"] as Currency[]).map((c) => (
+                            <button
+                              key={c}
+                              type="button"
+                              onClick={() => setCurrency(c)}
+                              className={`text-[10px] font-bold px-2 py-0.5 rounded-md transition-all ${
+                                currency === c
+                                  ? "bg-teal text-background"
+                                  : "text-slate-500 hover:text-slate-300"
+                              }`}
+                            >
+                              {c === "INR" ? "₹" : c === "USD" ? "$" : "€"}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
                       <select
                         {...register("budget")}
                         onFocus={() => setFocusedField("budget")}
@@ -394,11 +439,9 @@ export function ContactSection() {
                         className={`${inputClass("budget")} bg-surface text-slate-300 cursor-pointer`}
                       >
                         <option value="">Select a range...</option>
-                        <option value="below-10k">Below ₹10,000</option>
-                        <option value="10k-25k">₹10,000 – ₹25,000</option>
-                        <option value="25k-1lakh">₹25,000 – ₹1,00,000</option>
-                        <option value="1lakh-3lakh">₹1,00,000 – ₹3,00,000</option>
-                        <option value="5lakh+">₹5,00,000+</option>
+                        {budgetOptions[currency].map(({ value, label }) => (
+                          <option key={value} value={value}>{label}</option>
+                        ))}
                       </select>
                     </div>
                   </div>
