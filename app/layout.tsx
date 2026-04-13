@@ -652,7 +652,8 @@ export default function RootLayout({
                   s.parentNode.insertBefore(t,s)}(window,document,'script',
                   'https://connect.facebook.net/en_US/fbevents.js');
                   fbq('init','${META_PIXEL_ID}');
-                  fbq('track','PageView');
+                  var _pvId = (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : (Date.now().toString(36) + Math.random().toString(36).slice(2));
+                  fbq('track','PageView', {}, { eventID: _pvId });
                 `,
               }}
             />

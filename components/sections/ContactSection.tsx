@@ -37,9 +37,17 @@ const budgetOptions: Record<Currency, { value: string; label: string }[]> = {
   ],
 };
 
+function generateEventID(): string {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
 function trackEvent(event: string, params?: Record<string, unknown>) {
   if (typeof window !== "undefined" && typeof window.fbq === "function") {
-    window.fbq("track", event, params);
+    const eventID = generateEventID();
+    window.fbq("track", event, params ?? {}, { eventID });
   }
 }
 
