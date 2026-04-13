@@ -143,6 +143,8 @@ export function ContactSection() {
       trackEvent("Lead", {
         content_name: "Project Enquiry",
         content_category: "Consultancy",
+        currency: "INR",
+        value: 0,
       });
       setSubmitted(true);
     }
