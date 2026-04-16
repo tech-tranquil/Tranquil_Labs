@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Sparkles, TrendingUp, Shield, Zap } from "lucide-react";
 import { gsap } from "gsap";
@@ -33,6 +33,7 @@ export function HeroSection() {
   const sectionRef  = useRef<HTMLElement>(null);
   const contentRef  = useRef<HTMLDivElement>(null);
   const reduced     = useReducedMotion();
+  const [liteMode, setLiteMode] = useState(true);
 
   // ── Mouse parallax for aurora ──────────────────────────
   const mouseX = useMotionValue(0.5); // normalised 0-1
@@ -67,6 +68,21 @@ export function HeroSection() {
     hero.addEventListener("mousemove", onMove, { passive: true });
     return () => hero.removeEventListener("mousemove", onMove);
   }, [reduced, mouseX, mouseY]);
+
+  useEffect(() => {
+    const evaluate = () => {
+      const coarsePointer = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+      const smallViewport = window.matchMedia("(max-width: 1024px)").matches;
+      const saveData = Boolean(
+        (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
+      );
+      setLiteMode(coarsePointer || smallViewport || reduced || saveData);
+    };
+
+    evaluate();
+    window.addEventListener("resize", evaluate, { passive: true });
+    return () => window.removeEventListener("resize", evaluate);
+  }, [reduced]);
 
   useEffect(() => {
     if (reduced) return;
@@ -123,10 +139,16 @@ export function HeroSection() {
 
       {/* ── Layer 1: Particles ── */}
       <div className="absolute inset-0 z-[1]">
-        <ParticleCanvas count={90} className="absolute inset-0" interactive />
+        <ParticleCanvas
+          count={liteMode ? 28 : 90}
+          className="absolute inset-0"
+          interactive={!liteMode}
+          enableConnections={!liteMode}
+          connectionDistance={liteMode ? 80 : 100}
+        />
       </div>
 
-      {!reduced && (
+      {!reduced && !liteMode && (
         <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden">
 
           {/* ── Vertical light beams rising from bottom ── */}
