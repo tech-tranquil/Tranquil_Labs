@@ -8,22 +8,10 @@ export function getLenis() {
   return lenisInstance;
 }
 
-interface UseLenisOptions {
-  enabled?: boolean;
-}
-
-export function useLenis({ enabled = true }: UseLenisOptions = {}) {
+export function useLenis() {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    if (!enabled) {
-      if (lenisInstance) {
-        lenisInstance.destroy();
-        lenisInstance = null;
-      }
-      return;
-    }
-
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -44,5 +32,5 @@ export function useLenis({ enabled = true }: UseLenisOptions = {}) {
       lenis.destroy();
       lenisInstance = null;
     };
-  }, [enabled]);
+  }, []);
 }

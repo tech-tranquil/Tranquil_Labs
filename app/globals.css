@@ -39,17 +39,12 @@ body {
     radial-gradient(ellipse 80% 60% at 100% 100%, rgba(167, 139, 250, 0.07) 0%, transparent 55%),
     radial-gradient(ellipse 70% 50% at 50% 0%,   rgba(11,  59,  203, 0.05) 0%, transparent 55%);
   background-size: 100% 100%;
+  animation: bg-breathe 20s ease-in-out infinite;
   color: #f8fafc;
   font-family: var(--font-inter), sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-  body {
-    animation: bg-breathe 20s ease-in-out infinite;
-  }
 }
 
 /* ─── Keyframe Animations ─── */

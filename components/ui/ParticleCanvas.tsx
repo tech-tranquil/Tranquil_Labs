@@ -17,8 +17,6 @@ interface ParticleCanvasProps {
   className?: string;
   interactive?: boolean;
   colorScheme?: "teal" | "mixed";
-  enableConnections?: boolean;
-  connectionDistance?: number;
 }
 
 export function ParticleCanvas({
@@ -26,8 +24,6 @@ export function ParticleCanvas({
   className,
   interactive = true,
   colorScheme = "mixed",
-  enableConnections = true,
-  connectionDistance = 100,
 }: ParticleCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
@@ -82,9 +78,8 @@ export function ParticleCanvas({
         if (interactive) {
           const dx = p.x - mx;
           const dy = p.y - my;
-          const distSq = dx * dx + dy * dy;
-          if (distSq > 0.0001 && distSq < 120 * 120) {
-            const dist = Math.sqrt(distSq);
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
             const force = (120 - dist) / 120;
             p.vx += (dx / dist) * force * 0.3;
             p.vy += (dy / dist) * force * 0.3;
@@ -119,26 +114,21 @@ export function ParticleCanvas({
       }
 
       // Draw connections
-      if (enableConnections) {
-        const distanceSq = connectionDistance * connectionDistance;
-        for (let i = 0; i < particlesRef.current.length; i++) {
-          for (let j = i + 1; j < particlesRef.current.length; j++) {
-            const a = particlesRef.current[i];
-            const b = particlesRef.current[j];
-            const dx = a.x - b.x;
-            const dy = a.y - b.y;
-            const distSq = dx * dx + dy * dy;
-
-            if (distSq < distanceSq) {
-              const dist = Math.sqrt(distSq);
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              const alpha = (1 - dist / connectionDistance) * 0.15;
-              ctx.strokeStyle = `rgba(45,212,191,${alpha})`;
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
-            }
+      for (let i = 0; i < particlesRef.current.length; i++) {
+        for (let j = i + 1; j < particlesRef.current.length; j++) {
+          const a = particlesRef.current[i];
+          const b = particlesRef.current[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            const alpha = (1 - dist / 100) * 0.15;
+            ctx.strokeStyle = `rgba(45,212,191,${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
           }
         }
       }
@@ -176,7 +166,7 @@ export function ParticleCanvas({
       canvas.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("visibilitychange", handleVisibility);
     };
-  }, [count, interactive, reduced, enableConnections, connectionDistance]);
+  }, [count, interactive, reduced]);
 
   if (reduced) {
     return (
